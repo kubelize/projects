@@ -1,0 +1,47 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sdtd
+  namespace: argocd
+spec:
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: false
+      allowEmpty: false
+    syncOptions:
+      - CreateNamespace=true
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://kubelize.github.io/game-servers/
+    targetRevision: 0.1.0
+    chart: game-servers
+    helm:
+      parameters: []
+      valuesObject:
+        replicaCount: 1
+        image:
+          repository: kubelize/game-servers
+          pullPolicy: IfNotPresent
+          tag: "0.3.4-sdtd"
+        gameService:
+          type: LoadBalancer
+          ports:
+            - name: gameport1tcp
+              protocol: TCP
+              port: 26900
+              targetPort: 26900
+            - name: gameport1udp
+              protocol: UDP
+              port: 26900
+              targetPort: 26900
+            - name: gameport2udp
+              protocol: UDP
+              port: 26901
+              targetPort: 26901
+            - name: gameport3udp
+              protocol: UDP
+              port: 26902
+              targetPort: 26902
