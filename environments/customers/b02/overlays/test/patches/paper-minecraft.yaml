@@ -1,0 +1,71 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: patch
+spec:
+  ignoreDifferences:
+  - jsonPointers:
+    - /spec/volumeName
+    kind: PersistentVolumeClaim
+  syncPolicy:
+    syncOptions:
+      - RespectIgnoreDifferences=true
+      - CreateNamespace=true
+  destination:
+    namespace: b02-paper-minecraft
+  source:
+    helm:
+      valuesObject:
+        serviceAnnotations:
+          "lbipam.cilium.io/ips": "192.168.1.238"
+        extraEnv:
+          MC_HEALTH_EXTRA_ARGS: "--use-proxy"
+        minecraftServer:
+          motd: "§r⚒️ exists purely for testing purposes §r⚒️"
+          maxTickTime: 60000
+          difficulty: normal
+          levelSeed: "7830518263619659759"
+          whitelist: McKency, icykhaye, Moffoso
+          icon: "https://raw.githubusercontent.com/kubelize/kube-projects/refs/heads/dev/clusters/home-mck/inventory/src/assets/minecraft-icyk-snow-icon.png"
+          viewDistance: 12
+          memory: "6144M"
+          jvmXXOpts: "-XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true"
+          pluginUrls:
+            - https://hangarcdn.papermc.io/plugins/ViaVersion/ViaVersion/versions/5.3.2/PAPER/ViaVersion-5.3.2.jar
+            - https://hangarcdn.papermc.io/plugins/pop4959/Chunky/versions/1.4.36/PAPER/Chunky-Bukkit-1.4.36.jar
+            - https://hangarcdn.papermc.io/plugins/GriefPrevention/GriefPrevention/versions/16.18.4/PAPER/GriefPrevention%2016.18.4.jar
+            - https://mediafilez.forgecdn.net/files/6375/57/FishRewards-1.6.3.jar
+            - https://hangarcdn.papermc.io/plugins/Gecolay/GSit/versions/2.3.2/PAPER/GSit-2.3.2.jar
+            - https://hangarcdn.papermc.io/plugins/NichoGX/DiscordRoleSync/versions/2.3.2/PAPER/discord_role_sync-2.3.2.jar
+            - https://github.com/MilkBowl/Vault/releases/download/1.7.3/Vault.jar
+            - https://cdn.modrinth.com/data/s86X568j/versions/asaBBItO/ChunkyBorder-Bukkit-1.2.23.jar
+            - https://hangarcdn.papermc.io/plugins/Archy/AuraSkills/versions/2.3.3/PAPER/AuraSkills-2.3.3.jar
+            - https://github.com/DecentSoftware-eu/DecentHolograms/releases/download/2.8.17/DecentHolograms-2.8.17.jar
+            - https://github.com/plan-player-analytics/Plan/releases/download/5.6.2965/Plan-5.6-build-2965.jar
+            - https://github.com/EssentialsX/Essentials/releases/download/2.21.0/EssentialsX-2.21.0.jar
+            - https://download.luckperms.net/1593/bukkit/loader/LuckPerms-Bukkit-5.5.8.jar
+          externalTrafficPolicy: Local
+          extraPorts:
+            - name: plan
+              containerPort: 8804
+              protocol: TCP
+              service:
+                enabled: true
+                embedded: false
+                type: ClusterIP 
+                port: 8804
+                targetPort: 8804
+              ingress:
+                ingressClassName: nginx
+                enabled: false
+        resources:
+          requests:
+            cpu: 2000m
+            memory: 6144Mi
+          limits:
+            cpu: 4000m
+            memory: 8192Mi
+        nodeSelector:
+          kubernetes.io/hostname: "mck-wk1"
+
+          

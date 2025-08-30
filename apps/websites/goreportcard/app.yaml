@@ -1,0 +1,84 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: "goreportcard"
+  namespace: "argocd"
+spec:
+  project: default
+  destination:
+    server: "https://kubernetes.default.svc"
+  source:
+    repoURL: https://bedag.github.io/helm-charts
+    targetRevision: 2.0.0
+    chart: raw
+    helm:
+      valuesObject:
+        resources:
+          - apiVersion: apps/v1
+            kind: Deployment
+            metadata:
+              name: goreportcard
+              labels:
+                app: goreportcard
+            spec:
+              replicas: 1
+              selector:
+                matchLabels:
+                  app: goreportcard
+              template:
+                metadata:
+                  labels:
+                    app: goreportcard
+                spec:
+                  containers:
+                    - name: goreportcard
+                      image: kubelize/goreportcard:1.0.1
+                      ports:
+                        - containerPort: 8000
+                      env:
+                        - name: PORT
+                          value: "8000"
+                      resources:
+                        requests:
+                          cpu: "100m"
+                          memory: "128Mi"
+                        limits:
+                          cpu: "500m"
+                          memory: "512Mi"
+          - apiVersion: v1
+            kind: Service
+            metadata:
+              name: goreportcard
+              labels:
+                app: goreportcard
+            spec:
+              selector:
+                app: goreportcard
+              ports:
+                - protocol: TCP
+                  port: 8000
+                  targetPort: 8080
+              type: ClusterIP
+          - apiVersion: networking.k8s.io/v1
+            kind: Ingress
+            metadata:
+              name: goreportcard
+              annotations:
+                cert-manager.io/cluster-issuer: letsencrypt-prod-nginx
+            spec:
+              ingressClassName: nginx
+              tls:
+                - hosts:
+                    - goreportcard.kubelize.com
+                  secretName: goreportcard-tls
+              rules:
+                - host: goreportcard.kubelize.com
+                  http:
+                    paths:
+                      - path: /
+                        pathType: Prefix
+                        backend:
+                          service:
+                            name: goreportcard
+                            port:
+                              number: 8000
