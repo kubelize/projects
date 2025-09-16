@@ -19,8 +19,6 @@ spec:
           enabled: true
           ingressClass: nginx
           appHost: plane.kubelize.com
-          minioHost: plane-minio.kubelize.com
-          rabbitmqHost: plane-rabbitmq.kubelize.com
         env:
           storageClass: "proxmox"
 
