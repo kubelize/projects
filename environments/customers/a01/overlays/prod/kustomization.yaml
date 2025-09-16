@@ -3,8 +3,13 @@ kind: Kustomization
 nameSuffix: "-prod"
 resources:
   - ../../../../../apps/websites/goreportcard/
+  - ../../../../../apps/productivity/plane/
 patches:
   - target:
       kind: Application
       name: goreportcard
+    path: ../../../../../common/patches/argocd-app-settings.yaml
+  - target:
+      kind: Application
+      name: plane
     path: ../../../../../common/patches/argocd-app-settings.yaml

@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: plane
+  namespace: "argocd"
+spec:
+  project: default
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: plane
+  source:
+    repoURL: https://helm.plane.so/
+    targetRevision: v1.14.1
+    chart: plane
+    helm:
+      valuesObject:
+        license:
+          licenseDomain: "plane.kubelize.com"
+          licenseServer: "https://prime.plane.so"
+        planeVersion: v1.14.1
+        ingress:
+          enabled: true
+          ingressClass: nginx
+        env:
+          storageClass: "proxmox"
+
