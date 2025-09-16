@@ -10,17 +10,17 @@ spec:
     namespace: plane
   source:
     repoURL: https://helm.plane.so/
-    targetRevision: v1.14.1
-    chart: plane
+    targetRevision: 1.2.2
+    chart: plane-ce
     helm:
       valuesObject:
-        license:
-          licenseDomain: "plane.kubelize.com"
-          licenseServer: "https://prime.plane.so"
-        planeVersion: v1.14.1
+        planeVersion: stable
         ingress:
           enabled: true
           ingressClass: nginx
+          appHost: plane.kubelize.com
+          minioHost: plane-minio.kubelize.com
+          rabbitmqHost: plane-rabbitmq.kubelize.com
         env:
           storageClass: "proxmox"
 
