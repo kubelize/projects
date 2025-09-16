@@ -19,6 +19,10 @@ spec:
           enabled: true
           ingressClass: nginx
           appHost: plane.kubelize.com
+          ingress_annotations:
+            cert-manager.io/cluster-issuer: letsencrypt-prod-nginx
+        ssl:
+          tls_secret_name: "plane-tls"
         env:
           storageClass: "proxmox"
 
