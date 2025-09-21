@@ -6,6 +6,8 @@ metadata:
 spec:
   project: default
   sources:
+    - plugin:
+      name: gomplate
     - repoURL: https://github.com/kubelize/projects
       path: environments/customers/a01/overlays
       targetRevision: main
