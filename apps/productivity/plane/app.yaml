@@ -9,6 +9,8 @@ spec:
     server: "https://kubernetes.default.svc"
     namespace: plane
   source:
+    plugin:
+      name: gomplate
     repoURL: https://helm.plane.so/
     targetRevision: 1.2.2
     chart: plane-ce
