@@ -9,8 +9,6 @@ spec:
     server: "https://kubernetes.default.svc"
     namespace: plane
   source:
-    plugin:
-      name: gomplate
     repoURL: https://helm.plane.so/
     targetRevision: 1.2.2
     chart: plane-ce
@@ -19,12 +17,12 @@ spec:
         planeVersion: stable
         ingress:
           enabled: true
-          ingressClass: {{ (datasource "data").settings.defaultIngressClass }}
-          appHost: plane.{{ (datasource "data").customer.domain }}
+          ingressClass: '{{ (datasource "data").settings.defaultIngressClass }}'
+          appHost: 'plane.{{ (datasource "data").customer.domain }}'
           ingress_annotations:
             cert-manager.io/cluster-issuer: letsencrypt-prod-nginx
         ssl:
           tls_secret_name: "plane-tls"
         env:
-          storageClass: {{ (datasource "data").settings.defaultStorageClass }}
+          storageClass: '{{ (datasource "data").settings.defaultStorageClass }}'
 
