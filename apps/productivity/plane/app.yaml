@@ -17,12 +17,12 @@ spec:
         planeVersion: stable
         ingress:
           enabled: true
-          ingressClass: '{{ (datasource "data").settings.defaultIngressClass }}'
-          appHost: 'plane.{{ (datasource "data").customer.domain }}'
+          ingressClass: (( grab $.subst.cluster.defaultIngressClass ))
+          appHost: (( concat "plane." $.subst.customer.primaryDomain ))
           ingress_annotations:
             cert-manager.io/cluster-issuer: letsencrypt-prod-nginx
         ssl:
           tls_secret_name: "plane-tls"
         env:
-          storageClass: '{{ (datasource "data").settings.defaultStorageClass }}'
+          storageClass: (( grab $.subst.cluster.defaultStorageClass ))
 
