@@ -9,7 +9,7 @@ patches:
       kind: Application
       name: goreportcard
     path: ../../../../../common/patches/argocd-app-settings.yaml
-  # - target:
-  #     kind: Application
-  #     name: plane
-  #   path: ../../../../../common/patches/argocd-app-settings.yaml
+  - target:
+      kind: Application
+      name: plane
+    path: ../../../../../common/patches/argocd-app-settings.yaml
