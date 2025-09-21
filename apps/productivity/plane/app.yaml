@@ -18,7 +18,7 @@ spec:
         ingress:
           enabled: true
           ingressClass: (datasource "data").settings.defaultIngressClass
-          appHost: plane.{{ (datasource "data").customer.domain }}
+          appHost: 'plane.{{ (datasource "data").customer.domain }}'
           ingress_annotations:
             cert-manager.io/cluster-issuer: letsencrypt-prod-nginx
         ssl:
