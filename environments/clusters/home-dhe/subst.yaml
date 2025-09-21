@@ -1,3 +1,0 @@
-settings:
-  defaultIngressClass: nginx
-  defaultStorageClass: proxmox

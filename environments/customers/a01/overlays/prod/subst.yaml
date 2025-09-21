@@ -1,0 +1,8 @@
+cluster:
+  settings:
+    defaultStorageClass: proxmox
+    defaultIngressClass: nginx
+customer:
+  name: a01a
+  primaryDomain: kubelize.com
+  altDomain: kubelize.io
