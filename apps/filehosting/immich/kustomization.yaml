@@ -3,3 +3,5 @@ kind: Kustomization
 resources:
   - app.yaml
   - oci.yaml
+  - ingress.yaml
+  - storage.yaml

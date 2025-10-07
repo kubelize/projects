@@ -32,6 +32,3 @@ spec:
     - repoURL: https://github.com/kubelize/projects
       targetRevision: main
       ref: values
-    - repoURL: https://github.com/kubelize/projects
-      targetRevision: main
-      path: apps/filehosting/immich/extra
