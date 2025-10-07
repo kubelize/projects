@@ -28,9 +28,9 @@ spec:
       helm:
         valueFiles:
           - $values/environments/customers/{{ .customer.name }}/overlays/{{ .customer.stage }}/valueFiles/immich/immich-values.yaml
-    - repoURL: https://github.com/kubelize/kube-projects
-      targetRevision: dev
-      path: tenants/example/stage/deploy
-    - repoURL: https://github.com/kubelize/kube-projects
+    # - repoURL: https://github.com/kubelize/projects
+    #   targetRevision: dev
+    #   path: tenants/example/stage/deploy
+    - repoURL: https://github.com/kubelize/projects
       targetRevision: dev
       ref: values
