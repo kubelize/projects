@@ -1,0 +1,35 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod-nginx
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+  name: immich
+spec:
+  tls:
+  - hosts:
+    - immich.{{ .customer.primaryDomain }}
+    - immich.{{ .customer.altDomain }}
+    secretName: immich-tls
+  ingressClassName: "{{ .cluster.defaultIngressClass }}"
+  rules:
+  - host: immich.{{ .customer.primaryDomain }}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: "{{ .customer.name }}-immich-{{ .customer.stage }}-server"
+            port:
+              number: 2283
+  - host: immich.{{ .customer.altDomain }}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: "{{ .customer.name }}-immich-{{ .customer.stage }}-server"
+            port:
+              number: 2283

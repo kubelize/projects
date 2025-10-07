@@ -14,7 +14,7 @@ spec:
   project: default
   destination:
     server: https://kubernetes.default.svc
-    namespace: "{{ .customer.name }}-immich-{{ .customer.stage }}"
+    namespace: "{{ .customer.name }}-immich"
   sources:
     - repoURL: registry-1.docker.io/bitnamicharts
       path: postgresql
@@ -29,9 +29,6 @@ spec:
       helm:
         valueFiles:
           - $values/environments/customers/{{ .customer.name }}/overlays/{{ .customer.stage }}/valueFiles/immich/immich-values.yaml
-    # - repoURL: https://github.com/kubelize/projects
-    #   targetRevision: main
-    #   path: tenants/example/stage/deploy
     - repoURL: https://github.com/kubelize/projects
       targetRevision: main
       ref: values
