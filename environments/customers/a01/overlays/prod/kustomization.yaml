@@ -14,6 +14,10 @@ patches:
       kind: Application
       name: immich
     path: ../../../../../common/patches/argocd-app-settings.yaml
+  - target:
+      kind: Kustomization
+      name: immich
+    path: patches/immich-exclude-resources.yaml
   # - target:
   #     kind: Application
   #     name: plane
