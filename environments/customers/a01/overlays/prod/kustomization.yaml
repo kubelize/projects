@@ -3,6 +3,7 @@ kind: Kustomization
 nameSuffix: "-prod"
 resources:
   - ../../../../../apps/websites/goreportcard/
+  - ../../../../../apps/filehosting/immich/
   # - ../../../../../apps/productivity/plane/
 patches:
   - target:

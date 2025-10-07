@@ -2,7 +2,6 @@ cluster:
   defaultStorageClass: proxmox
   defaultIngressClass: nginx
 customer:
-  name: a01
+  name: b01
   stage: prod
-  primaryDomain: kubelize.com
-  altDomain: kubelize.io
+  primaryDomain: mckensy.xyz
