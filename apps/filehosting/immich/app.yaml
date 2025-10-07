@@ -29,8 +29,8 @@ spec:
         valueFiles:
           - $values/environments/customers/{{ .customer.name }}/overlays/{{ .customer.stage }}/valueFiles/immich/immich-values.yaml
     # - repoURL: https://github.com/kubelize/projects
-    #   targetRevision: dev
+    #   targetRevision: main
     #   path: tenants/example/stage/deploy
     - repoURL: https://github.com/kubelize/projects
-      targetRevision: dev
+      targetRevision: main
       ref: values
