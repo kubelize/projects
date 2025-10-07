@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: immich-data
 spec:
-  storageClassName: "{{ .customer.defaultStorageClass }}"
+  storageClassName: "{{ .cluster.defaultStorageClass }}"
   accessModes:
     - ReadWriteOnce
   resources:
