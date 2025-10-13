@@ -5,3 +5,4 @@ customer:
   name: b01
   stage: prod
   primaryDomain: mckensy.xyz
+  altDomain: kubelize.com

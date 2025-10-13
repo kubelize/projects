@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  annotations:
+    argocd.argoproj.io/tracking-id: b01-immich-prod:/PersistentVolumeClaim:b01-immich/immich-data
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"PersistentVolumeClaim","metadata":{"annotations":{"argocd.argoproj.io/tracking-id":"b01-immich-prod:/PersistentVolumeClaim:b01-immich/immich-data"},"name":"immich-data","namespace":"b01-immich"},"spec":{"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"500Gi"}},"storageClassName":"proxmox"}}
+    pv.kubernetes.io/bind-completed: "yes"
+    pv.kubernetes.io/bound-by-controller: "yes"
+    volume.beta.kubernetes.io/storage-provisioner: csi.proxmox.sinextra.dev
+    volume.kubernetes.io/selected-node: mck-wk2
+    volume.kubernetes.io/storage-provisioner: csi.proxmox.sinextra.dev
+  creationTimestamp: "2025-04-13T19:03:53Z"
+  deletionGracePeriodSeconds: 0
+  deletionTimestamp: "2025-10-13T12:03:30Z"
+  finalizers:
+  - kubernetes.io/pvc-protection
+  name: immich-data
+  namespace: b01-immich
+  resourceVersion: "170076404"
+  uid: 2ee472f9-4695-4ccf-a741-f89f4b2a8a70
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Gi
+  storageClassName: proxmox
+  volumeMode: Filesystem
+  volumeName: pvc-2ee472f9-4695-4ccf-a741-f89f4b2a8a70
+status:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 500Gi
+  phase: Bound
