@@ -23,7 +23,7 @@ spec:
       helm:
         valueFiles:
           - $values/environments/customers/{{ .customer.name }}/overlays/{{ .customer.stage }}/valueFiles/immich/postgresql-values.yaml
-    - repoURL: ghcr.io/immich-app/immich-charts
+    - repoURL: https://immich-app.github.io/immich-charts
       targetRevision: 0.9.3
       chart: immich
       helm:
