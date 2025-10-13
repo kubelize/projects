@@ -1,4 +1,0 @@
-- op: remove
-  path: /resources/3  # removes storage.yaml
-- op: remove
-  path: /resources/2  # removes ingress.yaml

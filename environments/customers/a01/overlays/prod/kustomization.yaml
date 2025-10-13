@@ -15,9 +15,23 @@ patches:
       name: immich
     path: ../../../../../common/patches/argocd-app-settings.yaml
   - target:
-      kind: Kustomization
-      name: immich
-    path: patches/immich-exclude-resources.yaml
+      kind: Ingress
+      name: immich-prod
+    patch: |-
+      $patch: delete
+      apiVersion: networking.k8s.io/v1
+      kind: Ingress
+      metadata:
+        name: immich-ingress
+  - target:
+      kind: PersistentVolumeClaim
+      name: immich-data-prod
+    patch: |-
+      $patch: delete
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: immich-storage
   # - target:
   #     kind: Application
   #     name: plane
