@@ -4,7 +4,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod-nginx
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
-  name: "{{ .customer.name }}-immich"
+  name: "immich"
   namespace: "{{ .customer.name }}-immich"
 spec:
   tls:

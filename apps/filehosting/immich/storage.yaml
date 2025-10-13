@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: "{{ .customer.name }}-immich"
+  name: "immich"
   namespace: "{{ .customer.name }}-immich"
 spec:
   storageClassName: "{{ .cluster.defaultStorageClass }}"
