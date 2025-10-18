@@ -6,3 +6,13 @@ resources:
   - vanilla-minecraft-pvc.yaml
   - ../../../../../apps/filehosting/immich/
   - ../../../../../apps/gameservers/minecraft/vanilla/
+
+patches:
+- target:
+    kind: Application
+    name: vanilla-minecraft
+  path: ../../../../../common/patches/argocd-app-settings.yaml
+- target:
+    kind: Application
+    name: vanilla-minecraft
+  path: patches/vanilla-minecraft.yaml
