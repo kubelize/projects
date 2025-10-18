@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: b01a-vanilla-minecraft-minecraft
+    app.kubernetes.io/instance: b01a-vanilla-minecraft-minecraft
+    app.kubernetes.io/name: minecraft
+  name: b01a-vanilla-minecraft-minecraft-datadir
+  namespace: b01-minecraft
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 30Gi
+  storageClassName: proxmox
+  volumeMode: Filesystem
+  volumeName: pvc-3d1cd5a8-67d9-4c51-9f30-4903d0cfd164
