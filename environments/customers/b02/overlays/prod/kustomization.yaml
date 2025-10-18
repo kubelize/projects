@@ -17,3 +17,7 @@ patches:
     target:
       kind: Application
       name: linkstack
+  - path: patches/linkstack.yaml
+    target:
+      kind: Application
+      name: linkstack
