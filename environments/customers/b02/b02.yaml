@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: https://github.com/kubelize/kube-projects
-      path: environments/customers/a01/overlays
-      targetRevision: dev
+    - repoURL: https://github.com/kubelize/projects
+      path: environments/customers/b01/overlays
+      targetRevision: main
   destination:
     server: https://kubernetes.default.svc
     namespace: b02-reserved
