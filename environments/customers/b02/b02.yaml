@@ -7,7 +7,7 @@ spec:
   project: default
   sources:
     - repoURL: https://github.com/kubelize/projects
-      path: environments/customers/b01/overlays
+      path: environments/customers/b02/overlays
       targetRevision: main
   destination:
     server: https://kubernetes.default.svc
