@@ -9,10 +9,10 @@ resources:
 nameSuffix: "-prod"
 
 patches:
-  - path: ./patches/paper-minecraft.yaml
-    target:
-      kind: Application
-      name: paper-minecraft
+  # - path: ./patches/paper-minecraft.yaml
+  #   target:
+  #     kind: Application
+  #     name: paper-minecraft
   - path: ../../../../../common/patches/argocd-app-settings.yaml
     target:
       kind: Application
