@@ -1,0 +1,7 @@
+cluster:
+  defaultStorageClass: proxmox
+  defaultIngressClass: nginx
+customer:
+  name: b02
+  stage: prod
+  primaryDomain: icykhaye.xyz
