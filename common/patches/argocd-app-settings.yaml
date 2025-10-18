@@ -27,3 +27,4 @@ spec:
       # Apply only resources that are out of sync with the cluster
       - ApplyOutOfSyncOnly=true
       - FailOnSharedResource=true
+      - RespectIgnoreDifferences=true

@@ -7,9 +7,6 @@ spec:
   - jsonPointers:
     - /spec/volumeName
     kind: PersistentVolumeClaim
-  syncPolicy:
-    syncOptions:
-      - RespectIgnoreDifferences=true
   destination:
     namespace: b01-minecraft
   source:
