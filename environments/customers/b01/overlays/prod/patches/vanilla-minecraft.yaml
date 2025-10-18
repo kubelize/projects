@@ -39,7 +39,7 @@ spec:
           kubernetes.io/hostname: "mck-wk1"
         persistence:
           dataDir:
-            existingClaim: b01a-vanilla-minecraft-minecraft-datadir
+            existingClaim: b01-vanilla-minecraft-datadir-prod
           
 
           

@@ -1,11 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  labels:
-    app: b01a-vanilla-minecraft-minecraft
-    app.kubernetes.io/instance: b01a-vanilla-minecraft-minecraft
-    app.kubernetes.io/name: minecraft
-  name: b01a-vanilla-minecraft-minecraft-datadir
+  name: vanilla-minecraft-datadir
   namespace: b01-minecraft
 spec:
   accessModes:
