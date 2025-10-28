@@ -1,0 +1,57 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: "web-rcon"
+  namespace: "argocd"
+spec:
+  project: default
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: linkstack
+  source:
+    repoURL: https://bedag.github.io/helm-charts
+    targetRevision: 2.0.0
+    chart: raw
+    helm:
+      valuesObject:
+        resources:
+        - apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            name: web-rcon
+            namespace: web-rcon
+          spec:
+            replicas: 1
+            selector:
+              matchLabels:
+                app: web-rcon
+            template:
+              metadata:
+                labels:
+                  app: web-rcon
+              spec:
+                containers:
+                  - name: web-rcon
+                    image: kubelize/web-rcon:1.0.1
+                    imagePullPolicy: Always
+                    ports:
+                      - containerPort: 443
+                    volumeMounts:
+                      - name: secret-volume
+                        mountPath: /home/kubelize/rcon.yaml
+                        subPath: rcon.yaml
+                volumes:
+                  - name: secret-volume
+                    secret:
+                      secretName: rcon-config
+        - apiVersion: v1
+          kind: Service
+          metadata:
+            name: web-rcon-service
+          spec:
+            selector:
+              app: web-rcon
+            ports:
+              - protocol: TCP
+                port: 443
+                targetPort: 443
