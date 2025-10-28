@@ -7,7 +7,7 @@ spec:
   project: default
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: linkstack
+    namespace: web-rcon
   source:
     repoURL: https://bedag.github.io/helm-charts
     targetRevision: 2.0.0
