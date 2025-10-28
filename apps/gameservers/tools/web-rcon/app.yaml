@@ -19,7 +19,6 @@ spec:
           kind: Deployment
           metadata:
             name: web-rcon
-            namespace: web-rcon
           spec:
             replicas: 1
             selector:
