@@ -6,6 +6,7 @@ resources:
   - vanilla-minecraft-pvc.yaml
   - ../../../../../apps/filehosting/immich/
   - ../../../../../apps/gameservers/minecraft/vanilla/
+  - ../../../../../apps/gameservers/tools/web-rcon/
 
 patches:
 - target:
