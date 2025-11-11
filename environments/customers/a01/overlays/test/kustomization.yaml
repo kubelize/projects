@@ -8,3 +8,7 @@ patches:
       kind: Application
       name: ghost
     path: ../../../../../common/patches/argocd-app-settings.yaml
+  - path: patches/ghost.yaml
+    target:
+      kind: Application
+      name: ghost
