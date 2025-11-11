@@ -18,7 +18,6 @@ spec:
             kind: Deployment
             metadata:
               name: ghost-on-kubernetes
-              namespace: ghost-on-kubernetes
               labels:
                 app: ghost-on-kubernetes
                 app.kubernetes.io/name: ghost-on-kubernetes
@@ -42,7 +41,6 @@ spec:
               progressDeadlineSeconds: 600
               template:
                 metadata:
-                  namespace: ghost-on-kubernetes
                   labels:
                     app: ghost-on-kubernetes
                 spec:
@@ -180,7 +178,6 @@ spec:
             kind: StatefulSet
             metadata:
               name: ghost-on-kubernetes-mysql
-              namespace: ghost-on-kubernetes
               labels:
                 app: ghost-on-kubernetes-mysql
                 app.kubernetes.io/name: ghost-on-kubernetes-mysql
@@ -300,7 +297,6 @@ spec:
             kind: Service
             metadata:
               name: ghost-on-kubernetes-service
-              namespace: ghost-on-kubernetes
               labels:
                 app: ghost-on-kubernetes
                 app.kubernetes.io/name: ghost-on-kubernetes-service
@@ -321,7 +317,6 @@ spec:
             kind: Service
             metadata:
               name: ghost-on-kubernetes-mysql-service
-              namespace: ghost-on-kubernetes
               labels:
                 app: ghost-on-kubernetes-mysql
                 app.kubernetes.io/name: ghost-on-kubernetes-mysql-service
@@ -343,7 +338,6 @@ spec:
             kind: PersistentVolumeClaim
             metadata:
               name: k8s-ghost-content
-              namespace: ghost-on-kubernetes
               labels:
                 app: ghost-on-kubernetes
                 app.kubernetes.io/name: k8s-ghost-content
@@ -368,7 +362,6 @@ spec:
             kind: PersistentVolumeClaim
             metadata:
               name: ghost-on-kubernetes-mysql-pvc
-              namespace: ghost-on-kubernetes
               labels:
                 app: ghost-on-kubernetes-mysql
                 app.kubernetes.io/name: ghost-on-kubernetes-mysql-pvc
