@@ -26,3 +26,6 @@ spec:
             size: 20Gi
         valueFiles:
           - $values/environments/customers/{{ .customer.name }}/overlays/{{ .customer.stage }}/valueFiles/open-webui/open-webui-values.yaml
+    - repoURL: https://github.com/kubelize/projects
+      targetRevision: main
+      ref: values
