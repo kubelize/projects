@@ -4,4 +4,4 @@ metadata:
   name: patch
 spec:
   destination:
-    namespace: b02-linkstack
+    namespace: b01-linkstack
