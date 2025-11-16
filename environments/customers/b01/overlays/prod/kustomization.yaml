@@ -17,3 +17,11 @@ patches:
     kind: Application
     name: vanilla-minecraft
   path: patches/vanilla-minecraft.yaml
+- target:
+    kind: Application
+    name: linkstack
+  path: ../../../../../common/patches/argocd-app-settings.yaml
+- target:
+    kind: Application
+    name: linkstack
+  path: patches/linkstack.yaml
