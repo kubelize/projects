@@ -4,6 +4,7 @@ nameSuffix: "-prod"
 resources:
   - ../../../../../apps/websites/goreportcard/
   - ../../../../../apps/gameservers/tools/web-rcon/
+  - test-pod.yaml
   # - ../../../../../apps/productivity/plane/
 patches:
   - target:
