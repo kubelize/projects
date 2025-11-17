@@ -4,6 +4,7 @@ image:
   tag: "0.6.36"
 sso:
   enabled: true
+  mergeAccountsByEmail: true
   oidc:
     # -- Enable OIDC authentication
     # @section -- OIDC configuration
@@ -19,7 +20,7 @@ sso:
     providerUrl: "{{ .ejson.openWebui.providerUrl }}"
     # -- Name of the provider to show on the UI
     # @section -- OIDC configuration
-    providerName: "SSO"
+    providerName: "kubelize auth0"
     # -- Scopes to request (space-separated).
     # @section -- OIDC configuration
     scopes: "openid email profile"
