@@ -10,19 +10,13 @@ sso:
     enabled: false
     # -- OIDC client ID
     # @section -- OIDC configuration
-    clientId: ""
+    clientId: "{{ .ejson.openWebui.clientId }}"
     # -- OIDC client secret (ignored if clientExistingSecret is set)
     # @section -- OIDC configuration
-    clientSecret: ""
+    clientSecret: "{{ .ejson.openWebui.clientSecret }}"
     # -- OICD client secret from existing secret
     # @section -- OIDC configuration
-    clientExistingSecret: ""
-    # -- OIDC client secret key from existing secret
-    # @section -- OIDC configuration
-    clientExistingSecretKey: ""
-    # -- OIDC provider well known URL
-    # @section -- OIDC configuration
-    providerUrl: ""
+    providerUrl: "{{ .ejson.openWebui.providerUrl }}"
     # -- Name of the provider to show on the UI
     # @section -- OIDC configuration
     providerName: "SSO"
