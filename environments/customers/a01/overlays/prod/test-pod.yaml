@@ -13,5 +13,5 @@ spec:
       - while true; do echo "Environment variable: $TEST_VAR"; sleep 5; done
     env:
     - name: TEST_VAR
-      value: "{{ .ejson.open-webui.clientId }}"
+      value: "{{ .ejson.openWebui.clientId }}"
   restartPolicy: Never
