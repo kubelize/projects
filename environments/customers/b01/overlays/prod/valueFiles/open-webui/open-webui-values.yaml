@@ -3,11 +3,11 @@ image:
   # @section -- Image configuration
   tag: "0.6.36"
 sso:
-  enabled: false
+  enabled: true
   oidc:
     # -- Enable OIDC authentication
     # @section -- OIDC configuration
-    enabled: false
+    enabled: true
     # -- OIDC client ID
     # @section -- OIDC configuration
     clientId: "{{ .ejson.openWebui.clientId }}"
