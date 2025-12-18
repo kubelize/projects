@@ -2,16 +2,18 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 nameSuffix: "-prod"
 resources:
-  - ../../../../../apps/websites/goreportcard/
-  - ../../../../../apps/gameservers/tools/web-rcon/
-  - test-pod.yaml
-  # - ../../../../../apps/productivity/plane/
+  # - ../../../../../apps/gameservers/seven-days-to-die/
+  - ../../../../../apps/productivity/overleaf/
 patches:
   - target:
       kind: Application
-      name: goreportcard
-    path: ../../../../../common/patches/argocd-app-settings.yaml
-  # - target:
-  #     kind: Application
-  #     name: plane
-  #   path: ../../../../../common/patches/argocd-app-settings.yaml
+      name: overleaf
+    path: patches/destination.yaml
+#   - target:
+#       kind: Application
+#       name: goreportcard
+#     path: ../../../../../common/patches/argocd-app-settings.yaml
+#   - target:
+#       kind: Application
+#       name: sdtd
+#     path: patches/sdtd-values.yaml

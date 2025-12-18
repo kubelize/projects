@@ -1,0 +1,221 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: "overleaf"
+  namespace: "argocd"
+spec:
+  project: default
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: "{{ .customer.name }}-overleaf"
+  source:
+    repoURL: https://bedag.github.io/helm-charts
+    targetRevision: 2.0.0
+    chart: raw
+    helm:
+      valuesObject:
+        resources:
+          - apiVersion: apps/v1
+            kind: Deployment
+            metadata:
+              name: overleaf
+              labels:
+                app: overleaf
+            spec:
+              replicas: 1
+              selector:
+                matchLabels:
+                  app: overleaf
+              template:
+                metadata:
+                  labels:
+                    app: overleaf
+                spec:
+                  containers:
+                    - name: overleaf
+                      image: overleaf/overleaf:latest
+                      ports:
+                        - name: http
+                          containerPort: 80
+                      env:
+                        - name: SHARELATEX_SITE_URL
+                          value: "https://overleaf.{{ .customer.primaryDomain }}"
+                        - name: SHARELATEX_APP_NAME
+                          value: "Overleaf CE"
+                        - name: SHARELATEX_MONGO_URL
+                          value: "mongodb://overleaf-mongo:27017/sharelatex"
+                        - name: SHARELATEX_REDIS_HOST
+                          value: "overleaf-redis"
+                        - name: SHARELATEX_REDIS_PORT
+                          value: "6379"
+                        - name: REDIS_HOST
+                          value: "overleaf-redis"
+                        - name: REDIS_PORT
+                          value: "6379"
+                      volumeMounts:
+                        - name: overleaf-data
+                          mountPath: /var/lib/sharelatex
+                  volumes:
+                    - name: overleaf-data
+                      persistentVolumeClaim:
+                        claimName: overleaf-data
+
+          - apiVersion: apps/v1
+            kind: Deployment
+            metadata:
+              name: overleaf-redis
+              labels:
+                app: overleaf-redis
+            spec:
+              replicas: 1
+              selector:
+                matchLabels:
+                  app: overleaf-redis
+              template:
+                metadata:
+                  labels:
+                    app: overleaf-redis
+                spec:
+                  containers:
+                    - name: redis
+                      image: redis:7.2-alpine
+                      ports:
+                        - containerPort: 6379
+                      args:
+                        - "--save"
+                        - "60"
+                        - "1"
+                        - "--appendonly"
+                        - "yes"
+                      resources:
+                        requests:
+                          cpu: 50m
+                          memory: 128Mi
+                        limits:
+                          cpu: 250m
+                          memory: 256Mi
+
+          - apiVersion: apps/v1
+            kind: StatefulSet
+            metadata:
+              name: overleaf-mongo
+              labels:
+                app: overleaf-mongo
+            spec:
+              serviceName: overleaf-mongo
+              replicas: 1
+              selector:
+                matchLabels:
+                  app: overleaf-mongo
+              template:
+                metadata:
+                  labels:
+                    app: overleaf-mongo
+                spec:
+                  containers:
+                    - name: mongo
+                      image: mongo:6.0
+                      ports:
+                        - containerPort: 27017
+                      args:
+                        - "--storageEngine"
+                        - wiredTiger
+                      volumeMounts:
+                        - name: mongo-data
+                          mountPath: /data/db
+                      resources:
+                        requests:
+                          cpu: 100m
+                          memory: 256Mi
+                        limits:
+                          cpu: 500m
+                          memory: 512Mi
+              volumeClaimTemplates:
+                - metadata:
+                    name: mongo-data
+                  spec:
+                    accessModes:
+                      - ReadWriteOnce
+                    resources:
+                      requests:
+                        storage: 10Gi
+
+          - apiVersion: v1
+            kind: Service
+            metadata:
+              name: overleaf
+              labels:
+                app: overleaf
+            spec:
+              selector:
+                app: overleaf
+              ports:
+                - name: http
+                  port: 80
+                  targetPort: http
+              type: ClusterIP
+
+          - apiVersion: v1
+            kind: Service
+            metadata:
+              name: overleaf-redis
+              labels:
+                app: overleaf-redis
+            spec:
+              selector:
+                app: overleaf-redis
+              ports:
+                - port: 6379
+                  targetPort: 6379
+              type: ClusterIP
+
+          - apiVersion: v1
+            kind: Service
+            metadata:
+              name: overleaf-mongo
+              labels:
+                app: overleaf-mongo
+            spec:
+              clusterIP: None
+              selector:
+                app: overleaf-mongo
+              ports:
+                - port: 27017
+                  targetPort: 27017
+
+          - apiVersion: networking.k8s.io/v1
+            kind: Ingress
+            metadata:
+              name: overleaf
+              annotations:
+                cert-manager.io/cluster-issuer: letsencrypt-prod-nginx
+                nginx.ingress.kubernetes.io/proxy-body-size: "100m"
+            spec:
+              ingressClassName: "{{ .cluster.defaultIngressClass }}"
+              rules:
+                - host: "overleaf.{{ .customer.primaryDomain }}"
+                  http:
+                    paths:
+                      - path: /
+                        pathType: Prefix
+                        backend:
+                          service:
+                            name: overleaf
+                            port:
+                              number: 80
+              tls:
+                - hosts:
+                    - "overleaf.{{ .customer.primaryDomain }}"
+                  secretName: overleaf-tls
+
+          - apiVersion: v1
+            kind: PersistentVolumeClaim
+            metadata:
+              name: overleaf-data
+            spec:
+              accessModes:
+                - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 5Gi
+              storageClassName: "{{ .cluster.defaultStorageClass }}"
