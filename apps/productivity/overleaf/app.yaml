@@ -38,15 +38,15 @@ spec:
                         - name: http
                           containerPort: 80
                       env:
-                        - name: SHARELATEX_SITE_URL
+                        - name: OVERLEAF_SITE_URL
                           value: "https://overleaf.{{ .customer.primaryDomain }}"
-                        - name: SHARELATEX_APP_NAME
+                        - name: OVERLEAF_APP_NAME
                           value: "Overleaf CE"
-                        - name: SHARELATEX_MONGO_URL
+                        - name: OVERLEAF_MONGO_URL
                           value: "mongodb://overleaf-mongo:27017/sharelatex"
-                        - name: SHARELATEX_REDIS_HOST
+                        - name: OVERLEAF_REDIS_HOST
                           value: "overleaf-redis"
-                        - name: SHARELATEX_REDIS_PORT
+                        - name: OVERLEAF_REDIS_PORT
                           value: "6379"
                         - name: REDIS_HOST
                           value: "overleaf-redis"
