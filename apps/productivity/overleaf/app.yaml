@@ -33,7 +33,7 @@ spec:
                 spec:
                   containers:
                     - name: overleaf
-                      image: overleaf/overleaf:latest
+                      image: sharelatex/sharelatex:6.1.0-RC1
                       ports:
                         - name: http
                           containerPort: 80
