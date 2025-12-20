@@ -114,7 +114,7 @@ spec:
                 spec:
                   containers:
                     - name: mongo
-                      image: mongo:4.4
+                      image: mongo:8.0
                       ports:
                         - containerPort: 27017
                       args:
