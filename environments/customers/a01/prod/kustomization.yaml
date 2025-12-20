@@ -3,12 +3,12 @@ kind: Kustomization
 nameSuffix: "-prod"
 resources:
   - ../../../../apps/gameservers/seven-days-to-die/
-  - ../../../../apps/productivity/overleaf/
+  # - ../../../../apps/productivity/overleaf/
 patches:
-  - target:
-      kind: Application
-      name: overleaf
-    path: patches/destination.yaml
+  # - target:
+  #     kind: Application
+  #     name: overleaf
+  #   path: patches/destination.yaml
 #   - target:
 #       kind: Application
 #       name: goreportcard
