@@ -54,7 +54,7 @@ spec:
                           value: "6379"
                       volumeMounts:
                         - name: overleaf-data
-                          mountPath: /var/lib/sharelatex
+                          mountPath: /var/lib/overleaf
                   volumes:
                     - name: overleaf-data
                       persistentVolumeClaim:
@@ -114,7 +114,7 @@ spec:
                 spec:
                   containers:
                     - name: mongo
-                      image: mongo:6.0
+                      image: mongo:4.4
                       ports:
                         - containerPort: 27017
                       args:
