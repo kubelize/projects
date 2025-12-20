@@ -120,6 +120,8 @@ spec:
                       args:
                         - "--storageEngine"
                         - wiredTiger
+                        - "--replSet"
+                        - rs0
                       volumeMounts:
                         - name: mongo-data
                           mountPath: /data/db
@@ -130,6 +132,22 @@ spec:
                         limits:
                           cpu: 500m
                           memory: 512Mi
+                  initContainers:
+                    - name: mongo-init-replica-set
+                      image: mongo:8.0
+                      command:
+                        - /bin/sh
+                        - -c
+                        - |
+                          set -e
+                          mongo --host overleaf-mongo-0.overleaf-mongo:27017 <<'EOF'
+                          rs.initiate({
+                            _id: "rs0",
+                            members: [
+                              { _id: 0, host: "overleaf-mongo-0.overleaf-mongo:27017" }
+                            ]
+                          })
+                          EOF
               volumeClaimTemplates:
                 - metadata:
                     name: mongo-data
