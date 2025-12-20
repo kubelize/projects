@@ -122,6 +122,31 @@ spec:
                         - wiredTiger
                         - "--replSet"
                         - rs0
+                      lifecycle:
+                        postStart:
+                          exec:
+                            command:
+                              - /bin/sh
+                              - -ec
+                              - |
+                                # Wait for mongod to accept connections on localhost
+                                until mongosh --quiet --host 127.0.0.1 --eval 'db.runCommand({ping:1}).ok' | grep -q 1; do
+                                  sleep 1
+                                done
+
+                                # Initiate replica set only once (idempotent)
+                                mongosh --quiet --host 127.0.0.1 --eval '
+                                  try {
+                                    rs.status()
+                                  } catch (e) {
+                                    rs.initiate({
+                                      _id: "rs0",
+                                      members: [
+                                        { _id: 0, host: "'"$HOSTNAME"'.overleaf-mongo:27017" }
+                                      ]
+                                    })
+                                  }
+                                '
                       volumeMounts:
                         - name: mongo-data
                           mountPath: /data/db
@@ -132,22 +157,6 @@ spec:
                         limits:
                           cpu: 500m
                           memory: 512Mi
-                  initContainers:
-                    - name: mongo-init-replica-set
-                      image: mongo:8.0
-                      command:
-                        - /bin/sh
-                        - -c
-                        - |
-                          set -e
-                          mongosh --host overleaf-mongo-0.overleaf-mongo:27017 <<'EOF'
-                          rs.initiate({
-                            _id: "rs0",
-                            members: [
-                              { _id: 0, host: "overleaf-mongo-0.overleaf-mongo:27017" }
-                            ]
-                          })
-                          EOF
               volumeClaimTemplates:
                 - metadata:
                     name: mongo-data
@@ -195,6 +204,7 @@ spec:
                 app: overleaf-mongo
             spec:
               clusterIP: None
+              publishNotReadyAddresses: true
               selector:
                 app: overleaf-mongo
               ports:
