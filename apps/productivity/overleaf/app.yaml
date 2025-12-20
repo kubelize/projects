@@ -52,6 +52,27 @@ spec:
                           value: "overleaf-redis"
                         - name: REDIS_PORT
                           value: "6379"
+                        # Configure these via ejson.
+                        - name: OVERLEAF_EMAIL_SMTP_HOST
+                          value: ""
+                        - name: OVERLEAF_EMAIL_SMTP_PORT
+                          value: ""
+                        - name: OVERLEAF_EMAIL_SMTP_SECURE
+                          value: ""
+                        - name: OVERLEAF_EMAIL_SMTP_USER
+                          value: ""
+                        - name: OVERLEAF_EMAIL_SMTP_PASS
+                          value: ""
+                        - name: OVERLEAF_EMAIL_SMTP_TLS_REJECT_UNAUTH
+                          value: ""
+                        - name: OVERLEAF_EMAIL_SMTP_IGNORE_TLS
+                          value: ""
+                        - name: OVERLEAF_EMAIL_SMTP_NAME
+                          value: ""
+                        - name: OVERLEAF_EMAIL_SMTP_LOGGER
+                          value: ""
+                        - name: OVERLEAF_CUSTOM_EMAIL_FOOTER
+                          value: ""
                       volumeMounts:
                         - name: overleaf-data
                           mountPath: /var/lib/overleaf
