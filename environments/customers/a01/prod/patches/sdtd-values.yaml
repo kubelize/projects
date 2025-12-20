@@ -131,3 +131,5 @@ spec:
           - name: storage
             persistentVolumeClaim:
               claimName: a01-sdtd-prod
+        nodeSelector:
+          kubernetes.io/hostname: "wk-sora-01"
