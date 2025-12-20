@@ -140,7 +140,7 @@ spec:
                         - -c
                         - |
                           set -e
-                          mongo --host overleaf-mongo-0.overleaf-mongo:27017 <<'EOF'
+                          mongosh --host overleaf-mongo-0.overleaf-mongo:27017 <<'EOF'
                           rs.initiate({
                             _id: "rs0",
                             members: [
