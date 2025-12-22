@@ -30,3 +30,7 @@ patches:
       kind: Application
       name: nextcloud
     path: patches/destination.yaml
+  - target:
+      kind: CronJob
+      name: nextcloud-cron
+    path: patches/nextcloud-cronjob.yaml
