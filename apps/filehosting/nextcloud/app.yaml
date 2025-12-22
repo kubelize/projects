@@ -260,6 +260,25 @@ spec:
                 subPath: install-apps.sh
               - name: nginx-cache
                 mountPath: "/var/cache/nginx"
+            extraInitContainers:
+              - name: nextcloud-init
+                image: nextcloud:32.0.3-fpm-alpine
+                command:
+                  - sh
+                  - "-c"
+                  - |
+                    chown -R 82:82 /var/www/html
+                    chmod -R 770 /var/www/html
+                volumeMounts:
+                  - name: nextcloud-main
+                    mountPath: /var/www/
+                    subPath: root
+                  - name: nextcloud-main
+                    mountPath: /var/www/html
+                    subPath: html
+                securityContext:
+                  runAsUser: 0
+                  runAsGroup: 0
           internalDatabase:
             enabled: false
           externalDatabase:
