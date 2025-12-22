@@ -22,7 +22,7 @@ spec:
           volumes:
             - name: nextcloud-main
               persistentVolumeClaim:
-                claimName: "{{ .customer.nextcloud.pvcName }}"
+                claimName: "a01-nextcloud-prod-nextcloud"
           containers:
             - name: nextcloud-cron
               image: nextcloud:30.0.4-fpm-alpine
