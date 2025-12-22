@@ -259,7 +259,7 @@ spec:
                 mountPath: /docker-entrypoint-hooks.d/before-starting/install-apps.sh
                 subPath: install-apps.sh
               - name: nginx-cache
-                    add: ["CHOWN"]
+                mountPath: "/var/cache/nginx"
           internalDatabase:
             enabled: false
           externalDatabase:
