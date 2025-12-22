@@ -6,3 +6,5 @@ customer:
   stage: prod
   primaryDomain: kubelize.com
   altDomain: kubelize.io
+  nextcloud:
+    pvcName: a01-nextcloud-prod-nextcloud
