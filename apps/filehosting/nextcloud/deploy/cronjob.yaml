@@ -25,7 +25,7 @@ spec:
                 claimName: "a01-nextcloud-prod-nextcloud"
           containers:
             - name: nextcloud-cron
-              image: nextcloud:30.0.4-fpm-alpine
+              image: nextcloud:32.0.3-fpm-alpine
               imagePullPolicy: IfNotPresent
               command:
                 - sh
