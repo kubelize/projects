@@ -18,6 +18,7 @@ spec:
           securityContext:
             runAsUser: 82
             fsGroup: 82
+            fsGroupChangePolicy: "OnRootMismatch"
             runAsNonRoot: true
           volumes:
             - name: nextcloud-main
