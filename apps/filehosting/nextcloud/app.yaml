@@ -269,7 +269,31 @@ spec:
                     /bin/chown -R 82:82 /var/www/html
                     find /var/www/html -type d -exec chmod 750 {} \;
                     find /var/www/html -type f -exec chmod 640 {} \;
+                volumeMounts:
+                  - name: nextcloud-main
+                    mountPath: /var/www/
+                    subPath: root
+                  - name: nextcloud-main
+                    mountPath: /var/www/html
+                    subPath: html
+                  - name: nextcloud-main
+                    mountPath: /var/www/html/data
+                    subPath: data
+                  - name: nextcloud-main
+                    mountPath: /var/www/html/config
+                    subPath: config
+                  - name: nextcloud-main
+                    mountPath: /var/www/html/custom_apps
+                    subPath: custom_apps
+                  - name: nextcloud-main
+                    mountPath: /var/www/html/themes
+                    subPath: themes
+                  - name: nextcloud-main
+                    mountPath: /var/www/tmp
+                    subPath: tmp
                 securityContext:
+                  runAsUser: 0
+                  runAsGroup: 0
                   capabilities:
                     add: ["CHOWN"]
           internalDatabase:
