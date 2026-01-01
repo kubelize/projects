@@ -5,7 +5,7 @@ metadata:
   namespace: argocd
 spec:
   destination:
-    namespace: sdtd
+    namespace: a01-sdtd
   source:
     helm:
       valuesObject:
