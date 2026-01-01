@@ -18,15 +18,15 @@ patches:
       kind: Application
       name: sdtd
     path: patches/sdtd-values.yaml
-  - target:
-      kind: Application
-      name: sdtd
-    path: patches/destination.yaml
+  # - target:
+  #     kind: Application
+  #     name: sdtd
+  #   path: patches/destination.yaml
   - target:
       kind: Application
       name: nextcloud
     path: patches/nextcloud-values.yaml
-  - target:
-      kind: Application
-      name: nextcloud
-    path: patches/destination.yaml
+  # - target:
+  #     kind: Application
+  #     name: nextcloud
+  #   path: patches/destination.yaml

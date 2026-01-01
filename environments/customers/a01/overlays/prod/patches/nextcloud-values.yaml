@@ -1,4 +1,6 @@
 - op: replace
+  path: "/spec/destination/namespace/a01-nextcloud"
+- op: replace
   path: "/spec/sources/1/helm/valuesObject/ingress/tls"
   value:
     - secretName: nextcloud-tls
