@@ -59,7 +59,7 @@ spec:
             kind: Service
             metadata:
               annotations:
-              "lbipam.cilium.io/ips": "10.130.5.238"
+                "lbipam.cilium.io/ips": "10.130.5.238"
               name: skyrim-together
             spec:
               selector:
