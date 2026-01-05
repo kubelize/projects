@@ -31,3 +31,7 @@ patches:
   #     kind: Application
   #     name: nextcloud
   #   path: patches/destination.yaml
+  - target:
+      kind: Application
+      name: skyrim-together
+    path: patches/skyrim-together-values.yaml
