@@ -3,6 +3,7 @@ kind: Kustomization
 nameSuffix: "-prod"
 resources:
   - ../../../../../apps/gameservers/seven-days-to-die/
+  - ../../../../../apps/gameservers/skyrim-together/
   - ../../../../../apps/filehosting/nextcloud/
   # - ../../../../../apps/productivity/overleaf/
 patches:

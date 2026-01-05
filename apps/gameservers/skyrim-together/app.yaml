@@ -1,0 +1,102 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: "skyrim-together"
+  namespace: "argocd"
+spec:
+  project: default
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: skyrim-together
+  source:
+    repoURL: https://bedag.github.io/helm-charts
+    targetRevision: 2.0.0
+    chart: raw
+    helm:
+      valuesObject:
+        resources:
+          - apiVersion: apps/v1
+            kind: Deployment
+            metadata:
+              name: skyrim-together
+            spec:
+              replicas: 1
+              selector:
+                matchLabels:
+                  app: skyrim-together
+              template:
+                metadata:
+                  labels:
+                    app: skyrim-together
+                spec:
+                  containers:
+                    - name: skyrim-together
+                      image: tiltedphoques/st-reborn-server:latest
+                      ports:
+                        - name: game
+                          containerPort: 10578
+                          protocol: UDP
+                      stdin: true
+                      tty: true
+                      volumeMounts:
+                        - name: config
+                          mountPath: /st-server/config
+                        - name: data
+                          mountPath: /st-server/Data
+                        - name: logs
+                          mountPath: /st-server/logs
+                  volumes:
+                    - name: config
+                      persistentVolumeClaim:
+                        claimName: skyrim-together-config
+                    - name: data
+                      persistentVolumeClaim:
+                        claimName: skyrim-together-data
+                    - name: logs
+                      persistentVolumeClaim:
+                        claimName: skyrim-together-logs
+          - apiVersion: v1
+            kind: Service
+            metadata:
+              annotations:
+              "lbipam.cilium.io/ips": "10.130.5.238"
+              name: skyrim-together
+            spec:
+              selector:
+                app: skyrim-together
+              ports:
+                - name: game
+                  port: 10578
+                  targetPort: game
+                  protocol: UDP
+              type: LoadBalancer
+          - apiVersion: v1
+            kind: PersistentVolumeClaim
+            metadata:
+              name: skyrim-together-config
+            spec:
+              accessModes:
+                - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 1Gi
+          - apiVersion: v1
+            kind: PersistentVolumeClaim
+            metadata:
+              name: skyrim-together-data
+            spec:
+              accessModes:
+                - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 10Gi
+          - apiVersion: v1
+            kind: PersistentVolumeClaim
+            metadata:
+              name: skyrim-together-logs
+            spec:
+              accessModes:
+                - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 2Gi
