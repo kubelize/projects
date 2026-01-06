@@ -2,13 +2,9 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 nameSuffix: "-test"
 resources: []
-#   - ../../../../../apps/websites/ghost/
-# patches:
-#   - target:
-#       kind: Application
-#       name: ghost
-#     path: ../../../../../common/patches/argocd-app-settings.yaml
-#   - path: patches/ghost.yaml
-#     target:
-#       kind: Application
-#       name: ghost
+  - ../../../../../apps/websites/ghost/
+patches:
+  - path: patches/ghost.yaml
+    target:
+      kind: Application
+      name: ghost

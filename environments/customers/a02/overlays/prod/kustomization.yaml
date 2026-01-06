@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+nameSuffix: "-prod"
+resources:
+  - ../../../../../apps/gameservers/seven-days-to-die/
+patches:
+  - target:
+      kind: Application
+      name: sdtd
+    path: patches/sdtd-values.yaml

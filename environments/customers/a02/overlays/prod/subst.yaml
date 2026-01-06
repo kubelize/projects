@@ -1,0 +1,7 @@
+cluster:
+  defaultStorageClass: proxmox
+  defaultIngressClass: nginx
+customer:
+  name: a02
+  stage: prod
+  primaryDomain: expatrimove.com

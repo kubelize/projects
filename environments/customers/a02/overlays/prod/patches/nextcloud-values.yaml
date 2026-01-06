@@ -1,0 +1,23 @@
+- op: replace
+  path: "/spec/destination/namespace"
+  value: a02-nextcloud
+- op: replace
+  path: "/spec/sources/1/helm/valuesObject/ingress/tls"
+  value:
+    - secretName: nextcloud-tls
+      hosts:
+        - drive.kubelize.com
+- op: add
+  path: "/spec/sources/1/helm/valuesObject/nextcloud/host"
+  value: drive.kubelize.com
+- op: add
+  path: "/spec/sources/1/helm/valuesObject/mariadb/primary/persistence/size"
+  value: 5Gi
+- op: add
+  path: "/spec/sources/1/helm/valuesObject/persistence"
+  value: 
+    enabled: true
+    storageClass: nfs
+    size:
+      500Gi
+
