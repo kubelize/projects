@@ -31,7 +31,7 @@ spec:
                 spec:
                   initContainers:
                     - name: copy-htdocs
-                      image: linkstackorg/linkstack:latest
+                      image: linkstackorg/linkstack:amd64
                       command:
                         - /bin/ash
                         - -c
