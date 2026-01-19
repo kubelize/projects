@@ -52,6 +52,7 @@ spec:
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: false   # you already had this
         env:
+        # ---- Core Server Settings ----
         - name: SERVER_IP
           value: "0.0.0.0"
         - name: SERVER_PORT
@@ -62,6 +63,105 @@ spec:
           value: "FALSE"
         - name: TZ
           value: "Europe/Amsterdam"
+        - name: JAVA_ARGS
+          value: ""
+
+        # ---- Hytale Server Options ----
+        - name: HYTALE_CACHE
+          value: "FALSE"
+        - name: HYTALE_CACHE_DIR
+          value: "./Server/HytaleServer.aot"
+        - name: HYTALE_ACCEPT_EARLY_PLUGINS
+          value: "FALSE"
+        - name: HYTALE_ALLOW_OP
+          value: "FALSE"
+        - name: HYTALE_AUTH_MODE
+          value: ""
+        - name: HYTALE_BACKUP
+          value: "FALSE"
+        - name: HYTALE_BACKUP_DIR
+          value: "./backups"
+        - name: HYTALE_BACKUP_FREQUENCY
+          value: ""
+        - name: HYTALE_BACKUP_MAX_COUNT
+          value: ""
+        - name: HYTALE_BARE
+          value: "FALSE"
+        - name: HYTALE_BOOT_COMMAND
+          value: ""
+        - name: HYTALE_CLIENT_PID
+          value: ""
+        - name: HYTALE_DISABLE_ASSET_COMPARE
+          value: "FALSE"
+        - name: HYTALE_DISABLE_CPB_BUILD
+          value: "FALSE"
+        - name: HYTALE_DISABLE_FILE_WATCHER
+          value: "FALSE"
+        - name: HYTALE_DISABLE_SENTRY
+          value: "FALSE"
+        - name: HYTALE_EARLY_PLUGINS
+          value: ""
+        - name: HYTALE_EVENT_DEBUG
+          value: "FALSE"
+        - name: HYTALE_FORCE_NETWORK_FLUSH
+          value: "true"
+        - name: HYTALE_GENERATE_SCHEMA
+          value: "FALSE"
+        - name: HYTALE_IDENTITY_TOKEN
+          value: ""
+        - name: HYTALE_LOG
+          value: ""
+        - name: HYTALE_MIGRATE_WORLDS
+          value: ""
+        - name: HYTALE_MIGRATIONS
+          value: ""
+        - name: HYTALE_MODS
+          value: ""
+        - name: HYTALE_OWNER_NAME
+          value: ""
+        - name: HYTALE_OWNER_UUID
+          value: ""
+        - name: HYTALE_PREFAB_CACHE
+          value: ""
+        - name: HYTALE_SESSION_TOKEN
+          value: ""
+        - name: HYTALE_SHUTDOWN_AFTER_VALIDATE
+          value: "FALSE"
+        - name: HYTALE_SINGLEPLAYER
+          value: "FALSE"
+        - name: HYTALE_TRANSPORT
+          value: ""
+        - name: HYTALE_UNIVERSE
+          value: ""
+        - name: HYTALE_VALIDATE_ASSETS
+          value: "FALSE"
+        - name: HYTALE_VALIDATE_PREFABS
+          value: ""
+        - name: HYTALE_VALIDATE_WORLD_GEN
+          value: "FALSE"
+        - name: HYTALE_VERSION
+          value: "FALSE"
+        - name: HYTALE_WORLD_GEN
+          value: ""
+
+        # ---- Hytale Settings (config.json) ----
+        - name: HYTALE_SERVER_NAME
+          value: "Hytale Server"
+        - name: HYTALE_MOTD
+          value: ""
+        - name: HYTALE_PASSWORD
+          value: ""
+        - name: HYTALE_MAX_PLAYERS
+          value: "100"
+        - name: HYTALE_MAX_VIEW_RADIUS
+          value: "32"
+        - name: HYTALE_COMPRESSION
+          value: "false"
+        - name: HYTALE_WORLD
+          value: "default"
+        - name: HYTALE_GAMEMODE
+          value: "Adventure"
+
         ports:
         - containerPort: 5520  # The port the container listens on
           protocol: UDP # Important for UDP
