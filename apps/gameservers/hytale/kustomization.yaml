@@ -4,3 +4,4 @@ resources:
   - deployment.yaml
   - pvc.yaml
   - service.yaml
+# yes i know this doesn't work like that but ignore pls. :)
