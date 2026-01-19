@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hytale-deployment
+  labels:
+    app: hytale
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hytale
+  template:
+    metadata:
+      labels:
+        app: hytale
+    spec:
+      # ------------------------------------------------------------------
+      # 1. Give the pod a non‑root UID/GID and ensure the PVC gets that group
+      # ------------------------------------------------------------------
+      securityContext:
+        # All volumes mounted into this pod will get group 1000 (or whatever
+        # UID/GID your image uses for the “container” user).
+        fsGroup: 1000
+
+      # ------------------------------------------------------------------
+      # 2. Init‑container that runs as root and fixes ownership
+      # ------------------------------------------------------------------
+      initContainers:
+      - name: init-chown
+        image: busybox:latest
+        command:
+          - sh
+          - -c
+          - |
+            chown -R 1000:1000 /home/container
+            chmod -R 770 /home/container
+        volumeMounts:
+        - name: hytale-data
+          mountPath: /home/container
+
+      # ------------------------------------------------------------------
+      # 3. Main container
+      # ------------------------------------------------------------------
+      containers:
+      - name: hytale-server
+        image: deinfreu/hytale-server:experimental
+        securityContext:
+          # Run as the same UID/GID that we gave the PVC in the init‑container.
+          runAsUser: 1000
+          runAsGroup: 1000
+          # No privilege escalation – this satisfies Kyverno’s root‑deny.
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false   # you already had this
+        env:
+        - name: SERVER_IP
+          value: "0.0.0.0"
+        - name: SERVER_PORT
+          value: "5520"
+        - name: PROD
+          value: "FALSE"
+        - name: DEBUG
+          value: "FALSE"
+        - name: TZ
+          value: "Europe/Amsterdam"
+        ports:
+        - containerPort: 5520  # The port the container listens on
+          protocol: UDP # Important for UDP
+        volumeMounts:
+        - name: hytale-data
+          mountPath: /home/container
+      volumes:
+      - name: hytale-data
+        persistentVolumeClaim:
+          claimName: hytale-datadir
