@@ -37,7 +37,6 @@ spec:
         volumeMounts:
         - name: hytale-data
           mountPath: /home/container
-
       # ------------------------------------------------------------------
       # 3. Main container
       # ------------------------------------------------------------------
@@ -120,9 +119,9 @@ spec:
         - name: HYTALE_MODS
           value: ""
         - name: HYTALE_OWNER_NAME
-          value: ""
+          value: "McKensy"
         - name: HYTALE_OWNER_UUID
-          value: ""
+          value: "73d978ab-91be-487d-a472-691ded59f158"
         - name: HYTALE_PREFAB_CACHE
           value: ""
         - name: HYTALE_SESSION_TOKEN
@@ -148,13 +147,13 @@ spec:
 
         # ---- Hytale Settings (config.json) ----
         - name: HYTALE_SERVER_NAME
-          value: "Hytale Server"
+          value: "McK's Hytale Server"
         - name: HYTALE_MOTD
-          value: ""
+          value: "currently testing for stability and performance."
         - name: HYTALE_PASSWORD
-          value: ""
+          value: "meep"
         - name: HYTALE_MAX_PLAYERS
-          value: "100"
+          value: "10"
         - name: HYTALE_MAX_VIEW_RADIUS
           value: "32"
         - name: HYTALE_COMPRESSION
@@ -163,14 +162,23 @@ spec:
           value: "default"
         - name: HYTALE_GAMEMODE
           value: "Adventure"
-
         ports:
         - containerPort: 5520  # The port the container listens on
-          protocol: UDP # Important for UDP
+          protocol: UDP
         volumeMounts:
         - name: hytale-data
           mountPath: /home/container
+        - name: machine-id
+          mountPath: /etc/machine-id
+          subPath: machine-id
+          readOnly: true
       volumes:
+      - name: machine-id
+        configMap:
+          name: machine-id
+          items:
+          - key: machine-id
+            path: machine-id
       - name: hytale-data
         persistentVolumeClaim:
           claimName: hytale-datadir
