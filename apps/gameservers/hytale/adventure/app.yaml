@@ -23,13 +23,15 @@ spec:
       parameters: []
       valuesObject:
 
-        # Hytale Lobby Server Values
-        # This is the entry point server that players connect to first
-        # It can redirect/refer players to game world servers
+        # Hytale Game World Server Values
+        # Template for individual game world servers
+        # Players are referred here from the lobby
 
         replicaCount: 1
 
-        # Use Deployment for lobby (no need for stable network identity)
+        # Use StatefulSet for world servers (stable network identity and storage)
+        # This gives each replica its own PVC and predictable pod name:
+        #   hytale-survival-0, hytale-survival-1, hytale-survival-2
         useStatefulSet: true
 
         image:
@@ -38,28 +40,28 @@ spec:
           tag: "0.2.9-ht-alpha"
 
         imagePullSecrets: []
-        nameOverride: "hytale-lobby"
-        fullnameOverride: "hytale-lobby"
+        nameOverride: "hytale-adventure"  # Change per world: survival, creative, minigames, etc.
+        fullnameOverride: "hytale-adventure"
 
         serverPasswordSecret:
           useExisting: false
           existingSecretName: ""
 
-        # Lobby server uses less storage (no large world data)
+        # Game worlds need more storage for player data and chunks
         persistence:
           enabled: true
           storageClassName: "proxmox"
           accessMode: ReadWriteOnce
-          size: 20Gi  # Increased for full server persistence
+          size: 20Gi  # Larger for world data
 
         serverConfig:
           # ===== Core Settings =====
           TZ: "UTC"
           DEBUG: "FALSE"
           PROD: "FALSE"
-          SERVER_PORT: "5520"
+          SERVER_PORT: "5521"  # Different port per world
           SERVER_IP: "0.0.0.0"
-          JAVA_ARGS: "-Xms4G -Xmx6G -XX:+UseG1GC -XX:MaxGCPauseMillis=50 -XX:+ParallelRefProcEnabled -XX:+UnlockExperimentalVMOptions -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15"
+          JAVA_ARGS: "-Xms4G -Xmx8G"
 
           # ===== Hytale Cache Settings =====
           HYTALE_CACHE: "FALSE"
@@ -70,18 +72,18 @@ spec:
 
           # ===== Authentication & Access =====
           HYTALE_ACCEPT_EARLY_PLUGINS: "FALSE"
-          HYTALE_ALLOW_OP: "TRUE"  # Lobby admins can manage
+          HYTALE_ALLOW_OP: "TRUE"  # Allow ops to manage
           HYTALE_AUTH_MODE: ""  # authenticated (default)
-          HYTALE_IDENTITY_TOKEN: ""  # Get via /auth login command
-          HYTALE_SESSION_TOKEN: ""  # Get via /auth login command - REQUIRED for authenticated multiplayer
-          HYTALE_OWNER_NAME: "Kubeagon"  # Your Hytale username
-          HYTALE_OWNER_UUID: "014fefc5-2229-4ed7-92b4-4e54d2321024"  # Your player UUID
+          HYTALE_IDENTITY_TOKEN: ""
+          HYTALE_SESSION_TOKEN: ""
+          HYTALE_OWNER_NAME: "Kubeagon"
+          HYTALE_OWNER_UUID: "014fefc5-2229-4ed7-92b4-4e54d2321024"
 
           # ===== Backup Configuration =====
           HYTALE_BACKUP: "TRUE"
-          HYTALE_BACKUP_DIR: "/home/kubelize/backups"
-          HYTALE_BACKUP_FREQUENCY: "120"  # Every 2 hours
-          HYTALE_BACKUP_MAX_COUNT: "5"
+          HYTALE_BACKUP_DIR: "./backups"
+          HYTALE_BACKUP_FREQUENCY: "60"  # Every hour for game worlds
+          HYTALE_BACKUP_MAX_COUNT: "10"
 
           # ===== Server Options =====
           HYTALE_BARE: "FALSE"
@@ -123,52 +125,35 @@ spec:
           HYTALE_VERSION: "FALSE"
 
           # ===== config.json Settings =====
-          HYTALE_SERVER_NAME: "🎮 Kubelize Network - Lobby"
-          HYTALE_MOTD: "Welcome! Select a world to play"
-          HYTALE_PASSWORD: ""  # Public lobby
-          HYTALE_MAX_PLAYERS: "200"  # Can handle more since it's just a hub
-          HYTALE_MAX_VIEW_RADIUS: "4"  # 128 blocks (minimal for lobby)
+          HYTALE_SERVER_NAME: "🌲 Kubelize Network - Adventure"
+          HYTALE_MOTD: "Explore, build, survive!"
+          HYTALE_PASSWORD: ""  # Usually empty - access controlled by lobby
+          HYTALE_MAX_PLAYERS: "50"
+          HYTALE_MAX_VIEW_RADIUS: "12"  # 384 blocks - adjust based on performance
           HYTALE_COMPRESSION: "false"
-          HYTALE_WORLD: "lobby"  # Using custom lobby world
-          HYTALE_GAMEMODE: "Adventure"
-          
+          HYTALE_WORLD: "world"  # Main world name
+          HYTALE_GAMEMODE: "Adventure"  # or "Creative"
+
           # ===== Web Console Settings =====
           CONSOLE_PORT: "8080"  # Gotty web console port
 
         # CurseForge Mod Configuration
-        # To use CurseForge mods, you need an API key from https://console.curseforge.com/
         curseforge:
-          # List of mod references. Formats:
-          #   - "123456"         - Latest release of mod ID 123456
-          #   - "123456:789"     - Specific file ID 789 of mod 123456
-          #   - "123456@partial" - Latest file matching "partial" in name
           mods:
-              - server-teleporters
-              - hyessentialsx
-              # - mdevtools-development-tools
-              # - inventory-manager-api
-              # - "123456"
-              # - "789012:456789"
-          
-          # Reference to existing Kubernetes secret containing API key
-          # The secret should have a key named "api-key" with your CurseForge API key
+            - server-teleporters
+            # - inventory-manager-api
+            - hyessentialsx
+            - perfect-parries
+            - elitemobs
+            - yungs-hydungeons
+            # - mdevtools-development-tools
           apiKeySecret:
             name: "curseforge-api-key"
             key: "api-key"
-          
-          # Release channel: release, beta, alpha, or any
           releaseChannel: "release"
-          
-          # Automatically update mods on server start
           autoUpdate: true
-          
-          # Fail server startup if mod installation fails
           failOnError: false
-          
-          # Remove mods that are no longer in the mods list
           prune: false
-          
-          # Filter mods by game version (empty = any version)
           gameVersionFilter: ""
 
         serviceAccount:
@@ -179,7 +164,8 @@ spec:
 
         podAnnotations: {}
         podLabels:
-          server-type: "lobby"
+          server-type: "world"
+          world-name: "adventure"  # Change per world
 
         podSecurityContext:
           fsGroup: 1000
@@ -189,16 +175,16 @@ spec:
           runAsUser: 1000
           runAsGroup: 1000
 
-        # Lobby needs external access
+        # World servers are accessed via player referral (not directly)
+        # Can use ClusterIP for internal-only access
         gameService:
           annotations: {}
-            # "lbipam.cilium.io/ips": "10.130.5.240"  # Set your public IP
-          type: LoadBalancer  # Players connect here first
+          type: LoadBalancer  # External access for cross-server teleport
           ports:
             - name: gameport-udp
               protocol: UDP
-              port: 5520
-              targetPort: 5520
+              port: 5521  # Unique port per world
+              targetPort: 5521
             - name: gameport-tcp
               protocol: TCP
               port: 5520
@@ -216,7 +202,7 @@ spec:
         ingress:
           enabled: false
 
-        # Lobby server is lighter
+        # Game worlds need more resources
         resources:
           limits:
             cpu: "4"
@@ -253,13 +239,13 @@ spec:
         volumes:
           - name: backups
             persistentVolumeClaim:
-              claimName: backups-lobby
+              claimName: backups-adventure
           - name: server-config
             configMap:
-              name: hytale-lobby-config
+              name: hytale-survival-config
           - name: server-password
             secret:
-              secretName: hytale-lobby-server-password
+              secretName: hytale-survival-server-password
           - name: machine-id
             configMap:
               name: machine-id
