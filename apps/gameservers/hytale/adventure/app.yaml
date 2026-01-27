@@ -31,7 +31,7 @@ spec:
 
         # Use StatefulSet for world servers (stable network identity and storage)
         # This gives each replica its own PVC and predictable pod name:
-        #   hytale-survival-0, hytale-survival-1, hytale-survival-2
+        #   hytale-adventure-0, hytale-adventure-1, hytale-adventure-2
         useStatefulSet: true
 
         image:
@@ -242,10 +242,10 @@ spec:
               claimName: backups-adventure
           - name: server-config
             configMap:
-              name: hytale-survival-config
+              name: hytale-adventure-config
           - name: server-password
             secret:
-              secretName: hytale-survival-server-password
+              secretName: hytale-adventure-server-password
           - name: machine-id
             configMap:
               name: machine-id
