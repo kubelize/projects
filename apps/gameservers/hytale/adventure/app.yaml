@@ -146,6 +146,8 @@ spec:
             - perfect-parries
             - elitemobs
             - yungs-hydungeons
+            - partypro
+            - ymmersive-melodies
             # - mdevtools-development-tools
           apiKeySecret:
             name: "curseforge-api-key"
