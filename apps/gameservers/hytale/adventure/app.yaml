@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: hytale
+  name: hytale-adventure
   namespace: argocd
 spec:
   syncPolicy:
