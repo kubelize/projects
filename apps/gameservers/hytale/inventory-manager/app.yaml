@@ -6,7 +6,7 @@ metadata:
   namespace: argocd
 spec:
   destination:
-    namespace: a01-hytale
+    namespace: "{{ .customer.name }}-hytale"
     server: https://kubernetes.default.svc
   project: default
   source:
