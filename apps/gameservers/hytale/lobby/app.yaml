@@ -1,0 +1,271 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hytale
+  namespace: argocd
+spec:
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: false
+      allowEmpty: false
+    syncOptions:
+      - CreateNamespace=true
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://kubelize.github.io/game-servers/
+    targetRevision: 0.2.0
+    chart: game-servers
+    helm:
+      parameters: []
+      valuesObject:
+
+        # Hytale Lobby Server Values
+        # This is the entry point server that players connect to first
+        # It can redirect/refer players to game world servers
+
+        replicaCount: 1
+
+        # Use Deployment for lobby (no need for stable network identity)
+        useStatefulSet: true
+
+        image:
+          repository: kubelize/game-servers
+          pullPolicy: Always
+          tag: "0.2.9-ht-alpha"
+
+        imagePullSecrets: []
+        nameOverride: "hytale-lobby"
+        fullnameOverride: "hytale-lobby"
+
+        serverPasswordSecret:
+          useExisting: false
+          existingSecretName: ""
+
+        # Lobby server uses less storage (no large world data)
+        persistence:
+          enabled: true
+          storageClassName: "proxmox"
+          accessMode: ReadWriteOnce
+          size: 20Gi  # Increased for full server persistence
+
+        serverConfig:
+          # ===== Core Settings =====
+          TZ: "UTC"
+          DEBUG: "FALSE"
+          PROD: "FALSE"
+          SERVER_PORT: "5520"
+          SERVER_IP: "0.0.0.0"
+          JAVA_ARGS: "-Xms4G -Xmx6G -XX:+UseG1GC -XX:MaxGCPauseMillis=50 -XX:+ParallelRefProcEnabled -XX:+UnlockExperimentalVMOptions -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15"
+
+          # ===== Hytale Cache Settings =====
+          HYTALE_CACHE: "FALSE"
+          HYTALE_CACHE_DIR: "./Server/HytaleServer.aot"
+
+          # ===== Auto-Update Settings =====
+          HYTALE_AUTO_UPDATE: "TRUE"  # Check for and download game updates on server start
+
+          # ===== Authentication & Access =====
+          HYTALE_ACCEPT_EARLY_PLUGINS: "FALSE"
+          HYTALE_ALLOW_OP: "TRUE"  # Lobby admins can manage
+          HYTALE_AUTH_MODE: ""  # authenticated (default)
+          HYTALE_IDENTITY_TOKEN: ""  # Get via /auth login command
+          HYTALE_SESSION_TOKEN: ""  # Get via /auth login command - REQUIRED for authenticated multiplayer
+          HYTALE_OWNER_NAME: "Kubeagon"  # Your Hytale username
+          HYTALE_OWNER_UUID: "014fefc5-2229-4ed7-92b4-4e54d2321024"  # Your player UUID
+
+          # ===== Backup Configuration =====
+          HYTALE_BACKUP: "TRUE"
+          HYTALE_BACKUP_DIR: "/home/kubelize/backups"
+          HYTALE_BACKUP_FREQUENCY: "120"  # Every 2 hours
+          HYTALE_BACKUP_MAX_COUNT: "5"
+
+          # ===== Server Options =====
+          HYTALE_BARE: "FALSE"
+          HYTALE_BOOT_COMMAND: ""
+          HYTALE_CLIENT_PID: ""
+          HYTALE_DISABLE_ASSET_COMPARE: "FALSE"
+          HYTALE_DISABLE_CPB_BUILD: "FALSE"
+          HYTALE_DISABLE_FILE_WATCHER: "FALSE"
+          HYTALE_DISABLE_SENTRY: "TRUE"
+          HYTALE_EVENT_DEBUG: "FALSE"
+          HYTALE_FORCE_NETWORK_FLUSH: "true"
+
+          # ===== Schema & Validation =====
+          HYTALE_GENERATE_SCHEMA: "FALSE"
+          HYTALE_VALIDATE_ASSETS: "FALSE"
+          HYTALE_VALIDATE_PREFABS: ""
+          HYTALE_VALIDATE_WORLD_GEN: "FALSE"
+          HYTALE_SHUTDOWN_AFTER_VALIDATE: "FALSE"
+
+          # ===== Logging =====
+          HYTALE_LOG: ""
+
+          # ===== World & Content =====
+          HYTALE_MIGRATE_WORLDS: ""
+          HYTALE_MIGRATIONS: ""
+          HYTALE_UNIVERSE: ""
+          HYTALE_WORLD_GEN: ""
+          HYTALE_PREFAB_CACHE: ""
+
+          # ===== Mods & Plugins =====
+          HYTALE_MODS: ""
+          HYTALE_EARLY_PLUGINS: ""
+
+          # ===== Network & Transport =====
+          HYTALE_TRANSPORT: ""  # QUIC (default)
+          HYTALE_SINGLEPLAYER: "FALSE"
+
+          # ===== Version Control =====
+          HYTALE_VERSION: "FALSE"
+
+          # ===== config.json Settings =====
+          HYTALE_SERVER_NAME: "🎮 Kubelize Network - Lobby"
+          HYTALE_MOTD: "Welcome! Select a world to play"
+          HYTALE_PASSWORD: ""  # Public lobby
+          HYTALE_MAX_PLAYERS: "200"  # Can handle more since it's just a hub
+          HYTALE_MAX_VIEW_RADIUS: "4"  # 128 blocks (minimal for lobby)
+          HYTALE_COMPRESSION: "false"
+          HYTALE_WORLD: "lobby"  # Using custom lobby world
+          HYTALE_GAMEMODE: "Adventure"
+          
+          # ===== Web Console Settings =====
+          CONSOLE_PORT: "8080"  # Gotty web console port
+
+        # CurseForge Mod Configuration
+        # To use CurseForge mods, you need an API key from https://console.curseforge.com/
+        curseforge:
+          # List of mod references. Formats:
+          #   - "123456"         - Latest release of mod ID 123456
+          #   - "123456:789"     - Specific file ID 789 of mod 123456
+          #   - "123456@partial" - Latest file matching "partial" in name
+          mods:
+              - server-teleporters
+              - hyessentialsx
+              # - mdevtools-development-tools
+              # - inventory-manager-api
+              # - "123456"
+              # - "789012:456789"
+          
+          # Reference to existing Kubernetes secret containing API key
+          # The secret should have a key named "api-key" with your CurseForge API key
+          apiKeySecret:
+            name: "curseforge-api-key"
+            key: "api-key"
+          
+          # Release channel: release, beta, alpha, or any
+          releaseChannel: "release"
+          
+          # Automatically update mods on server start
+          autoUpdate: true
+          
+          # Fail server startup if mod installation fails
+          failOnError: false
+          
+          # Remove mods that are no longer in the mods list
+          prune: false
+          
+          # Filter mods by game version (empty = any version)
+          gameVersionFilter: ""
+
+        serviceAccount:
+          create: true
+          automount: true
+          annotations: {}
+          name: ""
+
+        podAnnotations: {}
+        podLabels:
+          server-type: "lobby"
+
+        podSecurityContext:
+          fsGroup: 1000
+
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 1000
+          runAsGroup: 1000
+
+        # Lobby needs external access
+        gameService:
+          annotations: {}
+            # "lbipam.cilium.io/ips": "10.130.5.240"  # Set your public IP
+          type: LoadBalancer  # Players connect here first
+          ports:
+            - name: gameport-udp
+              protocol: UDP
+              port: 5520
+              targetPort: 5520
+            - name: gameport-tcp
+              protocol: TCP
+              port: 5520
+              targetPort: 5520
+
+        webService:
+          enabled: true
+          type: ClusterIP
+          ports:
+            - name: console
+              protocol: TCP
+              port: 8080
+              targetPort: 8080
+
+        ingress:
+          enabled: false
+
+        # Lobby server is lighter
+        resources:
+          limits:
+            cpu: "4"
+            memory: "8Gi"
+          requests:
+            cpu: "2"
+            memory: "4Gi"
+
+        livenessProbe:
+          enabled: false
+
+        readinessProbe:
+          enabled: false
+
+
+        # Volume mounts
+        volumeMounts:
+          - name: storage
+            mountPath: /home/kubelize/server
+          - name: backups
+            mountPath: /home/kubelize/backups
+          - name: server-config
+            mountPath: /home/kubelize/config-data/config-values.yaml
+            subPath: config-values.yaml
+          - name: server-password
+            mountPath: /home/kubelize/config-data/serverpassword.yaml
+            subPath: serverpassword.yaml
+          - name: machine-id
+            mountPath: /etc/machine-id
+            subPath: machine-id
+            readOnly: true
+
+        # Volumes
+        volumes:
+          - name: backups
+            persistentVolumeClaim:
+              claimName: backups
+          - name: server-config
+            configMap:
+              name: hytale-lobby-config
+          - name: server-password
+            secret:
+              secretName: hytale-lobby-server-password
+          - name: machine-id
+            configMap:
+              name: machine-id
+              items:
+                - key: machine-id
+                  path: machine-id
+
+        nodeSelector: {}
+        affinity: {}
+        tolerations: []

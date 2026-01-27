@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+  name: hytale-postgresql
+  namespace: argocd
+spec:
+  destination:
+    namespace: a01-hytale
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    chart: postgresql
+    helm:
+      valuesObject:
+        auth:
+          database: hytale
+          existingSecret: hytale-postgresql-auth
+          secretKeys:
+            adminPasswordKey: postgres-password
+            userPasswordKey: password
+          username: hytale
+        image:
+          repository: postgres
+          tag: "16"
+        primary:
+          containerSecurityContext:
+            readOnlyRootFilesystem: false
+          initdb:
+            scripts:
+              00-create-hytale-db.sql: |
+                CREATE DATABASE hytale;
+          persistence:
+            enabled: true
+            size: 10Gi
+            storageClass: proxmox
+    repoURL: registry-1.docker.io/bitnamicharts
+    targetRevision: 16.7.4
