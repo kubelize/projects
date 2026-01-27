@@ -142,7 +142,7 @@ spec:
           mods:
             - server-teleporters
             # - inventory-manager-api
-            - hyessentialsx
+            - 1440233:7534554 # HyEssentialsX projectID:fileID
             - perfect-parries
             - elitemobs
             - yungs-hydungeons
