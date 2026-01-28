@@ -24,7 +24,7 @@ spec:
           instances: 1
           certificates:
             serverTLSSecret: hytale-postgresql-tls
-            serverCASecret: hytale-postgresql-ca
+            serverCASecret: hytale-postgresql-tls
           storage:
             size: 10Gi
             storageClass: proxmox
