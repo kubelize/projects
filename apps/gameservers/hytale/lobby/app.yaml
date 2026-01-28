@@ -238,6 +238,10 @@ spec:
             mountPath: /home/kubelize/server
           - name: backups
             mountPath: /home/kubelize/backups
+          - name: pg-ca
+            mountPath: /home/kubelize/tls/ca.crt
+            subPath: ca.crt
+            readOnly: true
           - name: server-config
             mountPath: /home/kubelize/config-data/config-values.yaml
             subPath: config-values.yaml
@@ -254,6 +258,9 @@ spec:
           - name: backups
             persistentVolumeClaim:
               claimName: backups-lobby
+          - name: pg-ca
+            secret:
+              secretName: hytale-postgresql-ca
           - name: server-config
             configMap:
               name: hytale-lobby-config
