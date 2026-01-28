@@ -57,7 +57,7 @@ spec:
   secretName: hytale-postgresql-ca
   issuerRef:
     kind: Issuer
-    name: hytale-postgresql-selfsigned
+    name: a01-hytale-postgresql-selfsigned-prod
   commonName: hytale-postgresql-ca
 
 ---
@@ -80,7 +80,7 @@ spec:
   secretName: hytale-postgresql-tls
   issuerRef:
     kind: Issuer
-    name: hytale-postgresql-ca-issuer
+    name: a01-hytale-postgresql-ca-issuer-prod
   dnsNames:
     - "{{ .customer.name }}-hytale-postgresql-prod.{{ .customer.name }}-hytale.svc.cluster.local"
   privateKey:
