@@ -82,7 +82,7 @@ spec:
     kind: Issuer
     name: a01-hytale-postgresql-ca-issuer-prod
   dnsNames:
-    - "{{ .customer.name }}-hytale-postgresql-prod.{{ .customer.name }}-hytale.svc.cluster.local"
+    - "{{ .customer.name }}-hytale-postgresql-prod-cluster-rw.{{ .customer.name }}-hytale.svc.cluster.local"
   privateKey:
     algorithm: RSA
     size: 2048
