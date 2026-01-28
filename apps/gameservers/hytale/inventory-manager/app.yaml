@@ -29,6 +29,8 @@ spec:
             size: 10Gi
             storageClass: proxmox
           postgresql:
+            parameters: {}
+          bootstrap:
             initdb:
               database: hytale
               owner: hytale
