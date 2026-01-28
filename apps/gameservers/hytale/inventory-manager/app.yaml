@@ -43,6 +43,13 @@ spec:
             scripts:
               00-create-hytale-db.sql: |
                 CREATE DATABASE hytale;
+              01-enable-ssl.sh: |
+                #!/bin/bash
+                set -e
+                echo "ssl = on" >> "$PGDATA/postgresql.conf"
+                echo "ssl_cert_file = '/opt/bitnami/postgresql/certs/tls.crt'" >> "$PGDATA/postgresql.conf"
+                echo "ssl_key_file = '/opt/bitnami/postgresql/certs/tls.key'" >> "$PGDATA/postgresql.conf"
+                echo "ssl_ca_file = '/opt/bitnami/postgresql/certs/ca.crt'" >> "$PGDATA/postgresql.conf"
           persistence:
             enabled: true
             size: 10Gi
