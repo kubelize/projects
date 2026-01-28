@@ -140,9 +140,9 @@ spec:
         # CurseForge Mod Configuration
         curseforge:
           mods:
-            - server-teleporters
+            # - server-teleporters
             # - inventory-manager-api
-            - 1440233:7534554 # HyEssentialsX projectID:fileID
+            # - 1440233:7534554
             - perfect-parries
             - elitemobs
             - yungs-hydungeons
