@@ -142,9 +142,9 @@ spec:
           #   - "123456"         - Latest release of mod ID 123456
           #   - "123456:789"     - Specific file ID 789 of mod 123456
           #   - "123456@partial" - Latest file matching "partial" in name
-          mods:
+          mods: []
               # - server-teleporters
-              - hyessentialsx
+              # - hyessentialsx
               # - mdevtools-development-tools
               # - inventory-manager-api
               # - "123456"

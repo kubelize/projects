@@ -139,15 +139,15 @@ spec:
 
         # CurseForge Mod Configuration
         curseforge:
-          mods:
+          mods: []
             # - server-teleporters
             # - inventory-manager-api
             # - 1440233:7534554
-            - perfect-parries
-            - elitemobs
-            - yungs-hydungeons
-            - partypro
-            - ymmersive-melodies
+            # - perfect-parries
+            # - elitemobs
+            # - yungs-hydungeons
+            # - partypro
+            # - ymmersive-melodies
             # - mdevtools-development-tools
           apiKeySecret:
             name: "curseforge-api-key"
