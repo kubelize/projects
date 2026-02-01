@@ -260,7 +260,7 @@ spec:
               claimName: backups-lobby
           - name: pg-ca
             secret:
-              secretName: hytale-postgresql-ca
+              secretName: "{{ .customer.name }}-hytale-postgresql-ca-{{ .customer.stage }}"
           - name: server-config
             configMap:
               name: hytale-lobby-config
