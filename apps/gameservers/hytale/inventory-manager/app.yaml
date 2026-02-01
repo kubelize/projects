@@ -23,8 +23,8 @@ spec:
         cluster:
           instances: 1
           certificates:
-            serverTLSSecret: hytale-postgresql-tls
-            serverCASecret: hytale-postgresql-tls
+            serverTLSSecret: "{{ .customer.name }}-hytale-postgresql-tls-{{ .customer.stage }}"
+            serverCASecret: "{{ .customer.name }}-hytale-postgresql-tls-{{ .customer.stage }}"
           storage:
             size: 10Gi
             storageClass: proxmox
@@ -54,7 +54,7 @@ metadata:
   namespace: "{{ .customer.name }}-hytale"
 spec:
   isCA: true
-  secretName: hytale-postgresql-ca
+  secretName: "{{ .customer.name }}-hytale-postgresql-ca-{{ .customer.stage }}"
   issuerRef:
     kind: Issuer
     name: "{{ .customer.name }}-hytale-postgresql-selfsigned-{{ .customer.stage }}"
@@ -68,7 +68,7 @@ metadata:
   namespace: "{{ .customer.name }}-hytale"
 spec:
   ca:
-    secretName: hytale-postgresql-ca
+    secretName: "{{ .customer.name }}-hytale-postgresql-ca-{{ .customer.stage }}"
 
 ---
 apiVersion: cert-manager.io/v1
@@ -77,7 +77,7 @@ metadata:
   name: hytale-postgresql
   namespace: "{{ .customer.name }}-hytale"
 spec:
-  secretName: hytale-postgresql-tls
+  secretName: "{{ .customer.name }}-hytale-postgresql-tls-{{ .customer.stage }}"
   issuerRef:
     kind: Issuer
     name: "{{ .customer.name }}-hytale-postgresql-ca-issuer-{{ .customer.stage }}"
