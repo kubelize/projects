@@ -3,6 +3,5 @@ cluster:
   defaultIngressClass: nginx
 customer:
   name: t99
-  stage: test
   primaryDomain: kubelize.com
   altDomain: kubelize.io
