@@ -4,5 +4,7 @@ cluster:
 customer:
   name: t99
   stage: prod
-  primaryDomain: kubelize.com
-  altDomain: kubelize.io
+app:
+  hytale:
+    ownerUid: "73d978ab-91be-487d-a472-691ded59f158"
+    ownerName: "McKensy"

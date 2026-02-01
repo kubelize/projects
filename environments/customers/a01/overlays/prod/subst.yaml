@@ -8,3 +8,7 @@ customer:
   altDomain: kubelize.io
   nextcloud:
     pvcName: a01-nextcloud-prod-nextcloud
+app:
+  hytale:
+    ownerUid: "014fefc5-2229-4ed7-92b4-4e54d2321024"
+    ownerName: "Kubeagon"
