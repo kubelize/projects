@@ -185,10 +185,9 @@ spec:
           fsGroup: 1000
 
         securityContext:
-          # runAsNonRoot: true
-          # runAsUser: 1000
-          # runAsGroup: 1000
-          privileged: true
+          runAsNonRoot: true
+          runAsUser: 1000
+          runAsGroup: 1000
 
         # Lobby needs external access
         gameService:
