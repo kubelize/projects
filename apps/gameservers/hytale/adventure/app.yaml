@@ -248,7 +248,7 @@ spec:
               claimName: backups-adventure
           - name: pg-ca
             secret:
-              secretName: hytale-postgresql-ca
+              secretName: "{{ .customer.name }}-hytale-postgresql-ca-{{ .customer.stage }}"
           - name: server-config
             configMap:
               name: hytale-adventure-config
