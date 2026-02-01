@@ -1,7 +1,0 @@
-cluster:
-  defaultStorageClass: proxmox
-  defaultIngressClass: nginx
-customer:
-  name: t99
-  primaryDomain: kubelize.com
-  altDomain: kubelize.io
