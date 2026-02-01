@@ -5,4 +5,4 @@ resources:
   - prod/
   - test/
 
-namePrefix: "a01-"
+namePrefix: "t99-"
