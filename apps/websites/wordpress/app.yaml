@@ -387,7 +387,8 @@ spec:
           ## @param ingress.className string Ingress class name
           className: "{{ .cluster.defaultIngressClass }}"
           ## @param ingress.annotations object Ingress annotations
-          annotations: {}
+          annotations:
+            cert-manager.io/cluster-issuer: letsencrypt-prod-nginx
           ## @param ingress.hosts list Ingress hosts configuration
           hosts:
             - host: "{{ .apps.wordpress.subDomain }}{{ .customer.primaryDomain }}"
