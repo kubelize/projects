@@ -16,7 +16,7 @@ spec:
     server: https://kubernetes.default.svc
     namespace: "{{ .customer.name }}-wordpress"
   source:
-    repoURL: oci://ghcr.io/slybase/charts/wordpress
+    repoURL: oci://ghcr.io/slybase/charts
     targetRevision: 2.0.0
     chart: wordpress
     helm:
