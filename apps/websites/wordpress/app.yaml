@@ -183,7 +183,7 @@ spec:
           ## @param wordpress.language string WordPress language (e.g. de_DE, default: en_US)
           language: ""
           ## @param wordpress.url string WordPress URL (used for WP_HOME and WP_SITEURL)
-          url: ""
+          url: "https://{{ .apps.wordpress.subDomain }}{{ .customer.primaryDomain }}"
 
           ## @param wordpress.configExtra string Custom values for wp-config.php (WP_HOME/WP_SITEURL added automatically)
           ## E.g.
