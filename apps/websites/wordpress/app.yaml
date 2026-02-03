@@ -194,7 +194,13 @@ spec:
           ##   define('DISALLOW_FILE_EDIT', true);
           ##   define('WP_AUTO_UPDATE_CORE', false);
           ## ```
-          configExtra: ""
+          configExtra: |
+            define('WP_HOME', 'https://{{ .apps.wordpress.subDomain }}{{ .customer.primaryDomain }}');
+            define('WP_SITEURL', 'https://{{ .apps.wordpress.subDomain }}{{ .customer.primaryDomain }}');
+            define('FORCE_SSL_ADMIN', true);
+            if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
+              $_SERVER['HTTPS'] = 'on';
+            }
 
           ## @section ConfigMap for wp-config.php (overrides wordpress.configExtra)
           configExtraConfigMap:
