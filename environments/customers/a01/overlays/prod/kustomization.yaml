@@ -4,9 +4,6 @@ nameSuffix: "-prod"
 resources:
   - ../../../../../apps/gameservers/seven-days-to-die/
   - ../../../../../apps/gameservers/skyrim-together/
-  - ../../../../../apps/gameservers/hytale/lobby/
-  - ../../../../../apps/gameservers/hytale/inventory-manager/
-  - ../../../../../apps/gameservers/hytale/adventure/
   # - ../../../../../apps/gameservers/hytale/skyblock/
   - ../../../../../apps/filehosting/nextcloud/
   # - ../../../../../apps/productivity/overleaf/

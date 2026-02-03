@@ -6,7 +6,7 @@ metadata:
   labels:
     argocd.argoproj.io/secret-type: repository
 stringData:
-  url: oci://ghcr.io/slybase/charts
+  url: ghcr.io/slybase/charts
   name: immich-charts
   type: helm
   enableOCI: "true"
