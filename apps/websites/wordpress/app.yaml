@@ -391,7 +391,7 @@ spec:
           annotations: {}
           ## @param ingress.hosts list Ingress hosts configuration
           hosts:
-            - host: "{{ .wordpress.subDomain }}{{ .customer.primaryDomain }}"
+            - host: "{{ .apps.wordpress.subDomain }}{{ .customer.primaryDomain }}"
               paths:
                 - path: /
                   pathType: ImplementationSpecific
@@ -399,7 +399,7 @@ spec:
           tls:
             - secretName: wordpress-tls
               hosts:
-                - "{{ .wordpress.subDomain }}{{ .customer.primaryDomain }}"
+                - "{{ .apps.wordpress.subDomain }}{{ .customer.primaryDomain }}"
 
         ## @section Metrics configuration
         metrics:
