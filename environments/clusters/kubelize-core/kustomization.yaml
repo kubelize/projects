@@ -6,4 +6,4 @@ resources:
   - ../../customers/qu3/
 
   # Artifacts
-  - ../../common/registries/
+  - ../../../common/registries/
