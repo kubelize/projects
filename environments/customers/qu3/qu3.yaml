@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: qu3
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: https://github.com/kubelize/projects
+      path: environments/customers/qu3/overlays
+      targetRevision: main
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: qu3-reserved

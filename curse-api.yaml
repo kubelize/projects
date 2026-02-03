@@ -1,8 +1,0 @@
-apiVersion: v1
-data:
-  api-key: JDJhJDEwJExNUXZQQm9UZUd2LmdLbVN6d21xYi52OExpSFhvdG9icXZUUnZpV0gzQk5jU3UzTGNRTTMu
-kind: Secret
-metadata:
-  name: curseforge-api-key
-  namespace: t99-hytale
-type: Opaque

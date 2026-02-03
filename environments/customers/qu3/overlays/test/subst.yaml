@@ -1,0 +1,10 @@
+cluster:
+  defaultStorageClass: proxmox
+  defaultIngressClass: nginx
+customer:
+  name: qu3
+  stage: test
+  primaryDomain: kubelize.com
+apps:
+  wordpress:
+    subDomain: "example."

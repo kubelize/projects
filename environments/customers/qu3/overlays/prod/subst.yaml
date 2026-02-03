@@ -1,0 +1,8 @@
+cluster:
+  defaultStorageClass: proxmox
+  defaultIngressClass: nginx
+customer:
+  name: qu3
+  stage: prod
+  primaryDomain: kubelize.com
+  altDomain: kubelize.io

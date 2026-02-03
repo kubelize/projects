@@ -1,0 +1,7 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: patch
+spec:
+  destination:
+    server: https://qu3-vcluster.qu3-vcluster:443
