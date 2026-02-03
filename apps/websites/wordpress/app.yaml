@@ -63,7 +63,7 @@ spec:
               pullPolicy: IfNotPresent
 
             ## @param wordpress.init.enabled bool Enable init container for first installation
-            enabled: false
+            enabled: true
             ## @param wordpress.init.existingSecret string Existing secret with keys: wordpress.username, wordpress.password, wordpress.email
             existingSecret: ""
             ## @section Existing Secret Keys
