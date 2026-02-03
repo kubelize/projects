@@ -409,7 +409,7 @@ spec:
           ## @descriptionEnd
           wordpress:
             ## @param metrics.wordpress.enabled bool Enable WordPress metrics
-            enabled: true
+            enabled: false
             ## @param metrics.wordpress.installPlugin bool Install the WordPress exporter plugin
             installPlugin: true
             ## @param metrics.wordpress.pluginNameOverride string Override the plugin name to install
