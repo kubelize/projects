@@ -120,7 +120,6 @@ spec:
           ## ```
           plugins:
             - name: woocommerce
-              version: latest
               activate: true
               autoupdate: true
 
