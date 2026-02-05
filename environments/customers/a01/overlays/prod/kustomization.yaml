@@ -3,7 +3,6 @@ kind: Kustomization
 nameSuffix: "-prod"
 resources:
   - ../../../../../apps/gameservers/seven-days-to-die/
-  - ../../../../../apps/gameservers/skyrim-together/
   # - ../../../../../apps/gameservers/hytale/skyblock/
   - ../../../../../apps/filehosting/nextcloud/
   # - ../../../../../apps/productivity/overleaf/
@@ -32,7 +31,3 @@ patches:
   #     kind: Application
   #     name: nextcloud
   #   path: patches/destination.yaml
-  - target:
-      kind: Application
-      name: skyrim-together
-    path: patches/skyrim-together-values.yaml
