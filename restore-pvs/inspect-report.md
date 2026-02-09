@@ -3,7 +3,7 @@
 Namespace: `restore-pvs`
 Node: `mck-wk1`
 
-## pvc-00321e6d-fba6-428a-9f5d-861efcc367c7
+## pvc-00321e6d-fba6-428a-9f5d-861efcc367c7 [2Gi]
 
 ```
 === /mnt/pvc-00321e6d-fba6-428a-9f5d-861efcc367c7 ===
@@ -12,7 +12,7 @@ drwxr-xr-x    3 root     root        4.0K Aug 22 14:15 .
 drwxr-xr-x    1 root     root          54 Feb  9 00:05 ..
 drwx------    2 root     root       16.0K Aug 22 14:15 lost+found
 ```
-## pvc-0baf06fd-ffa3-4e17-bcad-f38775402cdc
+## pvc-0baf06fd-ffa3-4e17-bcad-f38775402cdc [161Gi]
 
 ```
 === /mnt/pvc-0baf06fd-ffa3-4e17-bcad-f38775402cdc ===
@@ -22,7 +22,7 @@ drwxr-xr-x    1 root     root          54 Feb  9 00:06 ..
 drwxrws---    2 root     2000       16.0K Mar  7  2025 lost+found
 drwxrwsr-x   22 root     2000        4.0K Feb  8 18:45 prometheus-db
 ```
-## pvc-15bd81fe-9dde-4d3a-9d8b-f8f3c22e1f2b
+## pvc-15bd81fe-9dde-4d3a-9d8b-f8f3c22e1f2b [8Gi]
 
 ```
 === /mnt/pvc-15bd81fe-9dde-4d3a-9d8b-f8f3c22e1f2b ===
@@ -32,7 +32,7 @@ drwxr-xr-x    1 root     root          54 Feb  9 00:13 ..
 drwxrwsr-x    2 1001     1001        4.0K Feb  2 05:32 appendonlydir
 drwxrws---    2 root     1001       16.0K Apr 13  2025 lost+found
 ```
-## pvc-1ebd96a4-5ad0-4da8-b262-ab4795b7f11e
+## pvc-1ebd96a4-5ad0-4da8-b262-ab4795b7f11e [64Gi]
 
 ```
 === /mnt/pvc-1ebd96a4-5ad0-4da8-b262-ab4795b7f11e ===
@@ -41,7 +41,7 @@ drwxrwsr-x    3 root     2000        4.0K Mar 17  2025 .
 drwxr-xr-x    1 root     root          54 Feb  9 00:14 ..
 drwxrws---    2 root     2000       16.0K Mar 17  2025 lost+found
 ```
-## pvc-2049a345-1371-4597-bec0-469a5482820e
+## pvc-2049a345-1371-4597-bec0-469a5482820e [5Gi]
 
 ```
 === /mnt/pvc-2049a345-1371-4597-bec0-469a5482820e ===
@@ -86,7 +86,7 @@ drwxr-xr-x   53 100      101         4.0K Jul 28  2023 vendor
 -rw-r--r--    1 100      101         1.2K Jul 28  2023 web.config
 -rw-r--r--    1 100      101          631 Jul 28  2023 webpack.mix.js
 ```
-## pvc-3286186a-e8cf-4736-a8df-725221463d19
+## pvc-3286186a-e8cf-4736-a8df-725221463d19 [5Gi]
 
 ```
 === /mnt/pvc-3286186a-e8cf-4736-a8df-725221463d19 ===
@@ -133,7 +133,7 @@ drwxr-xr-x   62 100      101         4.0K Jul 27  2025 vendor
 -rw-r--r--    1 100      101         1.2K Jul 27  2025 web.config
 -rw-r--r--    1 100      101          613 Jul 27  2025 webpack.mix.js
 ```
-## pvc-3d1cd5a8-67d9-4c51-9f30-4903d0cfd164
+## pvc-3d1cd5a8-67d9-4c51-9f30-4903d0cfd164 [32Gi]
 
 ```
 === /mnt/pvc-3d1cd5a8-67d9-4c51-9f30-4903d0cfd164 ===
@@ -165,7 +165,7 @@ drwxrwsr-x    8 root     2000        4.0K Jan 17 18:52 versions
 -rw-rw-r--    1 1000     2000         797 Jan 17 23:37 whitelist.json
 drwxrwsr-x   12 root     2000        4.0K Feb  8 14:10 world
 ```
-## pvc-3fc295c8-2156-451a-aa57-73fc09993165
+## pvc-3fc295c8-2156-451a-aa57-73fc09993165 [21Gi]
 
 ```
 === /mnt/pvc-3fc295c8-2156-451a-aa57-73fc09993165 ===
@@ -174,7 +174,7 @@ drwxrwsr-x    3 root     1000        4.0K Feb  1 20:24 .
 drwxr-xr-x    1 root     root          54 Feb  9 00:21 ..
 drwxrws---    2 root     1000       16.0K Feb  1 20:24 lost+found
 ```
-## pvc-4716588c-6556-4042-9741-7d995ca89a28
+## pvc-4716588c-6556-4042-9741-7d995ca89a28 [21Gi]
 
 ```
 === /mnt/pvc-4716588c-6556-4042-9741-7d995ca89a28 ===
@@ -194,7 +194,7 @@ drwxrwsr-x    4 1000     1000        4.0K Feb  1 21:39 mods
 drwxrwsr-x    4 1000     1000        4.0K Feb  1 21:39 universe
 -rw-rw-r--    1 1000     1000          27 Feb  1 21:39 whitelist.json
 ```
-## pvc-531f203b-67a9-4696-932e-a86e59baf3d5
+## pvc-531f203b-67a9-4696-932e-a86e59baf3d5 [64Gi]
 
 ```
 === /mnt/pvc-531f203b-67a9-4696-932e-a86e59baf3d5 ===
@@ -241,7 +241,7 @@ drwxrwsr-x    2 root     2000        4.0K May 17  2025 simplebackups
 -rw-rw-r--    1 1000     2000         744 May 13  2025 whitelist.json
 drwxrwsr-x   23 root     2000       16.0K Jun 22  2025 world
 ```
-## pvc-56f275cf-cac3-4151-ac8d-8f8570626c27
+## pvc-56f275cf-cac3-4151-ac8d-8f8570626c27 [32Gi]
 
 ```
 === /mnt/pvc-56f275cf-cac3-4151-ac8d-8f8570626c27 ===
@@ -266,7 +266,7 @@ drwxrwsr-x    3 1000     2000        4.0K Mar 17  2025 versions
 -rw-rw-r--    1 1000     2000         263 Mar 17  2025 whitelist.json
 drwxrwsr-x   10 1000     2000        4.0K Mar 17  2025 world
 ```
-## pvc-5eb37c58-4bfe-45f2-86e4-a6e3a709071c
+## pvc-5eb37c58-4bfe-45f2-86e4-a6e3a709071c [21Gi]
 
 ```
 === /mnt/pvc-5eb37c58-4bfe-45f2-86e4-a6e3a709071c ===
@@ -287,7 +287,7 @@ drwxrwsr-x    3 1000     1000        4.0K Feb  1 21:15 mods
 drwxrwsr-x    4 1000     1000        4.0K Feb  1 21:08 universe
 -rw-rw-r--    1 1000     1000          27 Feb  1 21:08 whitelist.json
 ```
-## pvc-7ade3caa-4342-4b2b-a77b-40388f40b492
+## pvc-7ade3caa-4342-4b2b-a77b-40388f40b492 [21Gi]
 
 ```
 === /mnt/pvc-7ade3caa-4342-4b2b-a77b-40388f40b492 ===
@@ -308,7 +308,7 @@ drwxrwx---    3 1000     1000        4.0K Jan 20 14:31 mods
 drwxrwx---    4 1000     1000        4.0K Feb  8 18:45 universe
 -rwxrwx---    1 1000     1000          27 Feb  8 18:45 whitelist.json
 ```
-## pvc-84e27bd0-b79e-44e5-8f13-e816f4db26dc
+## pvc-84e27bd0-b79e-44e5-8f13-e816f4db26dc [64Gi]
 
 ```
 === /mnt/pvc-84e27bd0-b79e-44e5-8f13-e816f4db26dc ===
@@ -317,7 +317,7 @@ drwxrwsr-x    3 root     2000        4.0K Mar 17  2025 .
 drwxr-xr-x    1 root     root          54 Feb  9 00:27 ..
 drwxrws---    2 root     2000       16.0K Mar 17  2025 lost+found
 ```
-## pvc-926fcb41-2278-4f01-aeae-eed16f57bc7b
+## pvc-926fcb41-2278-4f01-aeae-eed16f57bc7b [2Gi]
 
 ```
 === /mnt/pvc-926fcb41-2278-4f01-aeae-eed16f57bc7b ===
@@ -330,7 +330,7 @@ drwxr-xr-x    2 root     root        4.0K Aug 22 14:15 uploads
 drwxr-xr-x    6 root     root        4.0K Aug 22 15:49 vector_db
 -rw-r--r--    1 root     root      368.0K Aug 22 15:42 webui.db
 ```
-## pvc-9803891b-132b-4591-bb30-6ad9d7aebc1c
+## pvc-9803891b-132b-4591-bb30-6ad9d7aebc1c [8Gi]
 
 ```=== /mnt/pvc-9803891b-132b-4591-bb30-6ad9d7aebc1c ===
 total 24K    
@@ -339,7 +339,7 @@ drwxr-xr-x    1 root     root          54 Feb  9 00:33 ..
 drwx------   21 1001     1001        4.0K Feb  8 18:45 data
 drwxrws---    2 root     1001       16.0K Apr 13  2025 lost+found
 ```
-## pvc-a1b21eb5-e420-4936-9fcc-d165e87ef6dd
+## pvc-a1b21eb5-e420-4936-9fcc-d165e87ef6dd [10Gi]
 
 ```
 === /mnt/pvc-a1b21eb5-e420-4936-9fcc-d165e87ef6dd ===
@@ -349,7 +349,7 @@ drwxr-xr-x    1 root     root          54 Feb  9 00:35 ..
 drwxrws---    2 root     tape       16.0K Feb  1 20:59 lost+found
 drwx------   19 26       tape        4.0K Feb  8 18:45 pgdata
 ```
-## pvc-a7f8e72e-d45d-48c1-9ba6-72eb623add65
+## pvc-a7f8e72e-d45d-48c1-9ba6-72eb623add65 [21Gi]
 
 ```
 === /mnt/pvc-a7f8e72e-d45d-48c1-9ba6-72eb623add65 ===
@@ -362,7 +362,7 @@ drwxr-xr-x    2 root     root        4.0K Dec 12 20:59 uploads
 drwxr-xr-x   28 root     root        4.0K Feb  8 17:49 vector_db
 -rw-r--r--    1 root     root        8.6M Feb  8 12:54 webui.db
 ```
-## pvc-e275d687-9569-42ee-bb18-ff7bb5042221
+## pvc-e275d687-9569-42ee-bb18-ff7bb5042221 [21Gi]
 
 ```
 === /mnt/pvc-e275d687-9569-42ee-bb18-ff7bb5042221 ===
@@ -378,7 +378,7 @@ drwxr-xr-x    1 root     root          54 Feb  9 00:38 ..
 drwxrwsr-x    2 1000     1000        4.0K Feb  2 11:39 archive
 drwxrws---    2 root     1000       16.0K Feb  1 20:24 lost+found
 ```
-## pvc-e51bf2d3-4377-43b2-97d5-72f0a36ecc98
+## pvc-e51bf2d3-4377-43b2-97d5-72f0a36ecc98 [32Gi]
 
 ```
 === /mnt/pvc-e51bf2d3-4377-43b2-97d5-72f0a36ecc98 ===
@@ -418,7 +418,7 @@ drwxrwsr-x   10 1000     2000        4.0K Jun 20  2025 world
 drwxrwsr-x    3 1000     2000        4.0K Jun 20  2025 world_nether
 drwxrwsr-x    3 1000     2000        4.0K Jun 20  2025 world_the_end
 ```
-## pvc-f015a888-994c-4098-8ec0-452c0a59388d
+## pvc-f015a888-994c-4098-8ec0-452c0a59388d [10Gi]
 
 ```
 === /mnt/pvc-f015a888-994c-4098-8ec0-452c0a59388d ===
@@ -428,7 +428,7 @@ drwxr-xr-x    1 root     root          54 Feb  9 00:40 ..
 drwxrwsr-x    2 root     2000        4.0K Feb  8 18:45 alertmanager-db
 drwxrws---    2 root     2000       16.0K Mar  7  2025 lost+found
 ```
-## pvc-f6e09be6-1b3c-41fa-9899-3fb230ba812b
+## pvc-f6e09be6-1b3c-41fa-9899-3fb230ba812b [5Gi]
 
 ```
 === /mnt/pvc-f6e09be6-1b3c-41fa-9899-3fb230ba812b ===
