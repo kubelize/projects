@@ -230,7 +230,6 @@ spec:
             mountPath: /home/kubelize/tls/ca.crt
             subPath: ca.crt
             readOnly: true
-            optional: true
           - name: server-config
             mountPath: /home/kubelize/config-data/config-values.yaml
             subPath: config-values.yaml
