@@ -76,8 +76,8 @@ spec:
           HYTALE_AUTH_MODE: ""  # authenticated (default)
           HYTALE_IDENTITY_TOKEN: ""
           HYTALE_SESSION_TOKEN: ""
-          HYTALE_OWNER_NAME: "Kubeagon"
-          HYTALE_OWNER_UUID: "014fefc5-2229-4ed7-92b4-4e54d2321024"
+          HYTALE_OWNER_NAME: "{{ .app.hytale.ownerName }}"
+          HYTALE_OWNER_UUID: "{{ .app.hytale.ownerUid }}"
 
           # ===== Backup Configuration =====
           HYTALE_BACKUP: "TRUE"
