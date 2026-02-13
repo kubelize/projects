@@ -6,3 +6,7 @@ customer:
   stage: prod
   primaryDomain: mckensy.xyz
   altDomain: kubelize.com
+app:
+  hytale:
+    ownerUid: "73d978ab-91be-487d-a472-691ded59f158"
+    ownerName: "McKensy"

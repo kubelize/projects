@@ -8,6 +8,7 @@ resources:
   - ../../../../../apps/gameservers/tools/web-rcon/
   - ../../../../../apps/websites/open-webui/
   - ../../../../../apps/websites/linkstack/
+  - ../../../../../apps/gameservers/hytale/adventure/
 
 patches:
 - target:
