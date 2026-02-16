@@ -4,6 +4,7 @@ cluster:
 customer:
   name: a01
   stage: prod
+  project: dhe-private
   primaryDomain: kubelize.com
   altDomain: kubelize.io
   nextcloud:

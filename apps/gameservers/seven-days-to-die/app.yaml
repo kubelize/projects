@@ -11,7 +11,7 @@ spec:
       allowEmpty: false
     syncOptions:
       - CreateNamespace=true
-  project: default
+  project: "{{ .customer.project }}"
   destination:
     server: https://kubernetes.default.svc
   source:
