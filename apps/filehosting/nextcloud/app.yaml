@@ -20,7 +20,7 @@ spec:
       targetRevision: main
       path: apps/filehosting/nextcloud/deploy
     - repoURL: https://nextcloud.github.io/helm/
-      targetRevision: 8.7.0
+      targetRevision: 8.9.1
       chart: nextcloud
       helm:
         parameters: []

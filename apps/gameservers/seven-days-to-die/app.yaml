@@ -16,7 +16,7 @@ spec:
     server: https://kubernetes.default.svc
   source:
     repoURL: https://kubelize.github.io/game-servers/
-    targetRevision: 0.1.0
+    targetRevision: 0.2.0
     chart: game-servers
     helm:
       parameters: []

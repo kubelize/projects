@@ -17,7 +17,7 @@ spec:
     namespace: "{{ .customer.name }}-open-webui"
   source:
     repoURL: https://helm.openwebui.com/
-    targetRevision: 8.14.0
+    targetRevision: 8.22.1
     chart: open-webui
     helm:
       valuesObject:
