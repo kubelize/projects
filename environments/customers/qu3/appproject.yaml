@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: qu3-lutteursdescimes
+  namespace: argocd
+spec:
+  description: Project for customer qu3
+  
+  # Allow apps to be created in the qu3-reserved namespace
+  sourceNamespaces:
+    - qu3-reserved
+  
+  # Allow deploying to qu3 namespace (and any other namespaces if needed)
+  destinations:
+    - namespace: qu3-*
+      server: https://kubernetes.default.svc
+    # Add more destinations if this customer needs to deploy elsewhere:
+    # - namespace: qu3-*
+    #   server: https://kubernetes.default.svc
+  
+  # Git repositories this project can pull from
+  sourceRepos:
+    - '*'  # Allow all repos, or restrict to specific ones:
+    # - https://github.com/yourorg/qu3-apps.git
+  
+  # Allow all cluster resources (or restrict as needed)
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  
+  # Optional: Restrict namespace-scoped resources
+  # namespaceResourceWhitelist:
+  #   - group: ''
+  #     kind: ConfigMap
+  #   - group: ''
+  #     kind: Secret
+  #   - group: 'apps'
+  #     kind: Deployment
