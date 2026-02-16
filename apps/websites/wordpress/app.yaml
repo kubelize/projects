@@ -11,7 +11,7 @@ spec:
       allowEmpty: false
     syncOptions:
       - CreateNamespace=true
-  project: "{{ .customer.name }}"
+  project: "{{ .customer.name }}-{{ .customer.project }}"
   destination:
     server: https://kubernetes.default.svc
     namespace: "{{ .customer.name }}-wordpress-{{ .customer.stage }}"

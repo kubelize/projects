@@ -4,6 +4,7 @@ cluster:
 customer:
   name: qu3
   stage: test
+  project: lutteursdescimes
   primaryDomain: kubelize.com
 apps:
   wordpress:
