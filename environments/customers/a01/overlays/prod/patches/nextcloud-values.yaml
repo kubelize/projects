@@ -1,6 +1,9 @@
 - op: replace
   path: "/spec/destination/namespace"
-  value: a01-nextcloud
+  value: a01-nextcloud-prod
+- op: replace
+  path: "/spec/project"
+  value: a01-dhe-private
 - op: replace
   path: "/spec/sources/1/helm/valuesObject/ingress/tls"
   value:

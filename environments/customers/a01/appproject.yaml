@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: a01-dhe-private
+  namespace: argocd
+spec:
+  description: Project for customer a01
+  
+  # Allow apps to be created in the a01-reserved namespace
+  sourceNamespaces:
+    - a01-reserved
+  
+  # Allow deploying to a01 namespace (and any other namespaces if needed)
+  destinations:
+    - namespace: a01-*
+      server: https://kubernetes.default.svc
+    # Add more destinations if this customer needs to deploy elsewhere:
+    # - namespace: a01-*
+    #   server: https://kubernetes.default.svc
+  
+  # Git repositories this project can pull from
+  sourceRepos:
+    - '*'  # Allow all repos, or restrict to specific ones:
+    # - https://github.com/yourorg/a01-apps.git
+  
+  # Allow all cluster resources (or restrict as needed)
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  
+  # Optional: Restrict namespace-scoped resources
+  # namespaceResourceWhitelist:
+  #   - group: ''
+  #     kind: ConfigMap
+  #   - group: ''
+  #     kind: Secret
+  #   - group: 'apps'
+  #     kind: Deployment
