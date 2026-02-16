@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: wordpress
-  namespace: argocd
+  namespace: "{{ .customer.name }}-reserved"
 spec:
   syncPolicy:
     automated:
@@ -14,7 +14,7 @@ spec:
   project: default
   destination:
     server: https://kubernetes.default.svc
-    namespace: "{{ .customer.name }}-wordpress"
+    namespace: "{{ .customer.name }}-wordpress-{{ .customer.stage }}"
   source:
     repoURL: oci://ghcr.io/slybase/charts/wordpress
     targetRevision: 2.0.0
