@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: nextcloud
-  namespace: argocd
+  namespace: "{{ .customer.name }}-reserved"
 spec:
   syncPolicy:
     automated:
