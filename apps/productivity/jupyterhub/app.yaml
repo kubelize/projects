@@ -1,0 +1,71 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: jupyterhub
+  namespace: "{{ .customer.name }}-reserved"
+spec:
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: false
+      allowEmpty: false
+    syncOptions:
+      - CreateNamespace=true
+  project: "{{ .customer.project }}"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: "{{ .customer.name }}-jupyterhub-{{ .customer.stage }}"
+  source:
+    repoURL: https://jupyterhub.github.io/helm-chart
+    targetRevision: 4.3.2
+    chart: jupyterhub
+    helm:
+      valuesObject:
+        proxy:
+          service:
+            type: ClusterIP
+        ingress:
+          enabled: true
+          ingressClassName: "{{ .cluster.defaultIngressClass }}"
+          hosts:
+            - jupyter.{{ .customer.primaryDomain }}
+          tls:
+            - secretName: jupyterhub-tls
+              hosts:
+                - jupyter.{{ .customer.primaryDomain }}
+        hub:
+          config:
+            JupyterHub:
+              authenticator_class: github
+            GitHubOAuthenticator:
+              client_id: "{{ .ejson.jupyterhub.github.clientId }}"
+              client_secret: "{{ .ejson.jupyterhub.github.clientSecret }}"
+              oauth_callback_url: "https://jupyter.{{ .customer.primaryDomain }}/hub/oauth_callback"
+              scope:
+                - read:user
+            Authenticator:
+              admin_users:
+                - "{{ .ejson.jupyterhub.adminUser }}"
+              allowed_users:
+                - "{{ .ejson.jupyterhub.adminUser }}"
+        singleuser:
+          defaultUrl: /lab
+          image:
+            name: quay.io/jupyter/scipy-notebook
+            tag: "python-3.11"
+          storage:
+            dynamic:
+              storageClass: "{{ .cluster.defaultStorageClass }}"
+            capacity: 20Gi
+          cpu:
+            limit: 2
+            guarantee: 0.5
+          memory:
+            limit: 4G
+            guarantee: 1G
+
+        cull:
+          enabled: true
+          timeout: 3600
+          every: 300
+          users: true

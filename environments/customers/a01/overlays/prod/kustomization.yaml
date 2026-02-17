@@ -6,6 +6,7 @@ resources:
   # - ../../../../../apps/gameservers/hytale/skyblock/
   - ../../../../../apps/filehosting/nextcloud/
   # - ../../../../../apps/productivity/overleaf/
+  - ../../../../../apps/productivity/jupyterhub/
 patches:
   # - target:
   #     kind: Application
