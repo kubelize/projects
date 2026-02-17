@@ -21,6 +21,8 @@ spec:
     chart: jupyterhub
     helm:
       valuesObject:
+        rbac:
+          create: true
         proxy:
           service:
             type: ClusterIP
@@ -36,6 +38,11 @@ spec:
               hosts:
                 - jupyter.{{ .customer.primaryDomain }}
         hub:
+          serviceAccount:
+            create: true
+            annotations: {}
+          extraEnv:
+            JUPYTERHUB_KUBERNETES_REQUEST_TIMEOUT: "120"
           config:
             JupyterHub:
               authenticator_class: github
@@ -50,6 +57,16 @@ spec:
                 - "{{ .ejson.jupyterhub.adminUser }}"
               allowed_users:
                 - "{{ .ejson.jupyterhub.adminUser }}"
+            KubeSpawner:
+              k8s_api_request_timeout: 120
+              k8s_api_request_retry_timeout: 300
+          resources:
+            requests:
+              memory: 512Mi
+              cpu: 200m
+            limits:
+              memory: 1Gi
+              cpu: 1000m
         singleuser:
           defaultUrl: /lab
           image:
