@@ -17,7 +17,7 @@ spec:
     server: https://kubernetes.default.svc
   sources:
     - repoURL: https://github.com/kubelize/projects
-      targetRevision: main
+      targetRevision: prod
       path: apps/filehosting/nextcloud/deploy
     - repoURL: https://nextcloud.github.io/helm/
       targetRevision: 8.7.0
