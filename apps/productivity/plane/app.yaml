@@ -10,7 +10,7 @@ spec:
     namespace: plane
   source:
     repoURL: https://helm.plane.so/
-    targetRevision: 1.2.2
+    targetRevision: 1.4.1
     chart: plane-ce
     helm:
       valuesObject:
