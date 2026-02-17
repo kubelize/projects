@@ -8,7 +8,7 @@ spec:
   sources:
     - repoURL: https://github.com/kubelize/projects
       path: environments/customers/qu3/overlays
-      targetRevision: main
+      targetRevision: prod
   destination:
     server: https://kubernetes.default.svc
     namespace: qu3-reserved

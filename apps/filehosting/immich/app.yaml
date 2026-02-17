@@ -30,5 +30,5 @@ spec:
         valueFiles:
           - $values/environments/customers/{{ .customer.name }}/overlays/{{ .customer.stage }}/valueFiles/immich/immich-values.yaml
     - repoURL: https://github.com/kubelize/projects
-      targetRevision: main
+      targetRevision: prod
       ref: values
