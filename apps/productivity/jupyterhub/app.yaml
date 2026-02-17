@@ -92,6 +92,8 @@ spec:
           image:
             name: quay.io/jupyter/scipy-notebook
             tag: "python-3.11"
+          cloudMetadata:
+            blockWithIptables: false
           storage:
             type: dynamic
             dynamic:
