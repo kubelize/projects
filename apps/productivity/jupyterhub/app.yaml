@@ -41,6 +41,25 @@ spec:
           serviceAccount:
             create: true
             annotations: {}
+          networkPolicy:
+            enabled: true
+            egressAllowRules:
+              cloudMetadataServer: true
+              dnsPortsCloudMetadataServer: true
+              dnsPortsKubeSystemNamespace: true
+              dnsPortsPrivateIPs: true
+              nonPrivateIPs: true
+              privateIPs: true
+            egress:
+              - to:
+                  - namespaceSelector:
+                      matchLabels:
+                        kubernetes.io/metadata.name: default
+                ports:
+                  - protocol: TCP
+                    port: 6443
+                  - protocol: TCP
+                    port: 443
           extraEnv:
             JUPYTERHUB_KUBERNETES_REQUEST_TIMEOUT: "120"
           config:
@@ -58,8 +77,9 @@ spec:
               allowed_users:
                 - "{{ .ejson.jupyterhub.adminUser }}"
             KubeSpawner:
-              k8s_api_request_timeout: 120
+              k8s_api_request_timeout: 180
               k8s_api_request_retry_timeout: 300
+              http_timeout: 180
           resources:
             requests:
               memory: 512Mi
