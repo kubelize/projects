@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: stage-placeholder
+  namespace: "{{ .customer.name }}-reserved"
+  labels:
+    app.kubernetes.io/managed-by: argocd
+    kubelize.io/purpose: placeholder
+    kubelize.io/stage: "{{ .customer.stage }}"
+data:
+  note: "Keeps overlay output non-empty for CMP rendering"
