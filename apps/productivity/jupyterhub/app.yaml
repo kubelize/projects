@@ -26,8 +26,12 @@ spec:
         proxy:
           service:
             type: ClusterIP
-          networkPolicy:
-            enabled: false
+          chp:
+            networkPolicy:
+              enabled: false
+          traefik:
+            networkPolicy:
+              enabled: false
         ingress:
           enabled: true
           ingressClassName: "{{ .cluster.defaultIngressClass }}"
