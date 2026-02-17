@@ -26,6 +26,8 @@ spec:
         proxy:
           service:
             type: ClusterIP
+          networkPolicy:
+            enabled: false
         ingress:
           enabled: true
           ingressClassName: "{{ .cluster.defaultIngressClass }}"
@@ -42,24 +44,7 @@ spec:
             create: true
             annotations: {}
           networkPolicy:
-            enabled: true
-            egressAllowRules:
-              cloudMetadataServer: true
-              dnsPortsCloudMetadataServer: true
-              dnsPortsKubeSystemNamespace: true
-              dnsPortsPrivateIPs: true
-              nonPrivateIPs: true
-              privateIPs: true
-            egress:
-              - to:
-                  - namespaceSelector:
-                      matchLabels:
-                        kubernetes.io/metadata.name: default
-                ports:
-                  - protocol: TCP
-                    port: 6443
-                  - protocol: TCP
-                    port: 443
+            enabled: false
           extraEnv:
             JUPYTERHUB_KUBERNETES_REQUEST_TIMEOUT: "120"
           config:
@@ -94,6 +79,8 @@ spec:
             tag: "python-3.11"
           cloudMetadata:
             blockWithIptables: false
+          networkPolicy:
+            enabled: false
           storage:
             type: dynamic
             dynamic:
