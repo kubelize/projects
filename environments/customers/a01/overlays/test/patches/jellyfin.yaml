@@ -1,11 +1,11 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-	name: patch
+  name: patch
 spec:
-	source:
-		helm:
-			valuesObject:
-				persistence:
-					config:
-						size: 10Gi
+  source:
+    helm:
+      valuesObject:
+        persistence:
+          config:
+            size: 10Gi
