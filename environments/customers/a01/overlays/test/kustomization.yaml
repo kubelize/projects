@@ -4,4 +4,9 @@ namePrefix: "a01-"
 nameSuffix: "-test"
 resources:
   - placeholder-configmap.yaml
-patches: []
+  - ../../../../../apps/filehosting/jellyfin/
+patches:
+  - target:
+      kind: Application
+      name: jellyfin
+    path: patches/jellyfin.yaml
