@@ -11,7 +11,7 @@ spec:
       targetRevision: prod
     - repoURL: https://github.com/kubelize/projects
       path: environments/customers/a01/overlays/test
-      targetRevision: prod
+      targetRevision: test
   destination:
     server: https://kubernetes.default.svc
     namespace: a01-reserved

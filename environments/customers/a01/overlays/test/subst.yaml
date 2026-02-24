@@ -4,5 +4,6 @@ cluster:
 customer:
   name: a01
   stage: test
+  project: dhe-private
   primaryDomain: kubelize.com
   altDomain: kubelize.io
