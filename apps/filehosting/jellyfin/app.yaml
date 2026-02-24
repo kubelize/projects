@@ -40,9 +40,12 @@ spec:
           config:
             enabled: true
             accessMode: ReadWriteOnce
-            size: 500Gi
+            size: 5Gi
             storageClass: "{{ .cluster.defaultStorageClass }}"
           media:
-            enabled: false
+            enabled: true
+            accessMode: ReadWriteOnce
+            size: 5Gi
+            storageClass: "{{ .cluster.defaultStorageClass }}"  
           cache:
             enabled: false
