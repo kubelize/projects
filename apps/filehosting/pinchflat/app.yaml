@@ -38,6 +38,16 @@ spec:
                   labels:
                     app: pinchflat
                 spec:
+                  affinity:
+                    podAffinity:
+                      requiredDuringSchedulingIgnoredDuringExecution:
+                        - labelSelector:
+                            matchExpressions:
+                              - key: app.kubernetes.io/name
+                                operator: In
+                                values:
+                                  - jellyfin
+                          topologyKey: kubernetes.io/hostname
                   containers:
                     - name: pinchflat
                       image: ghcr.io/kieraneglin/pinchflat:latest

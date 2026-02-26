@@ -1,3 +1,0 @@
-- op: replace
-  path: /spec/source/helm/valuesObject/resources/1/spec/type
-  value: LoadBalancer
