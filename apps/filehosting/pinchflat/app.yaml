@@ -63,8 +63,7 @@ spec:
                           mountPath: /downloads
                   volumes:
                     - name: pinchflat-config
-                      persistentVolumeClaim:
-                        claimName: pinchflat-config
+                      emptyDir: {}
                     - name: media-library
                       persistentVolumeClaim:
                         claimName: "{{ .customer.name }}-jellyfin-{{ .customer.stage }}-media"
@@ -80,14 +79,3 @@ spec:
                   port: 8945
                   targetPort: http
               type: ClusterIP
-          - apiVersion: v1
-            kind: PersistentVolumeClaim
-            metadata:
-              name: pinchflat-config
-            spec:
-              accessModes:
-                - ReadWriteOnce
-              storageClassName: "{{ .cluster.defaultStorageClass }}"
-              resources:
-                requests:
-                  storage: 2Gi
