@@ -14,7 +14,7 @@ spec:
   project: "{{ .customer.name }}-{{ .customer.project }}"
   destination:
     server: https://kubernetes.default.svc
-    namespace: "{{ .customer.name }}-pinchflat-{{ .customer.stage }}"
+    namespace: "{{ .customer.name }}-jellyfin-{{ .customer.stage }}"
   source:
     repoURL: https://bedag.github.io/helm-charts
     targetRevision: 2.0.0
@@ -67,7 +67,7 @@ spec:
                         claimName: pinchflat-config
                     - name: media-library
                       persistentVolumeClaim:
-                        claimName: media-library
+                        claimName: "{{ .customer.name }}-jellyfin-{{ .customer.stage }}-media"
           - apiVersion: v1
             kind: Service
             metadata:
@@ -80,29 +80,6 @@ spec:
                   port: 8945
                   targetPort: http
               type: ClusterIP
-          - apiVersion: networking.k8s.io/v1
-            kind: Ingress
-            metadata:
-              name: pinchflat
-              annotations:
-                cert-manager.io/cluster-issuer: letsencrypt-prod-nginx
-            spec:
-              ingressClassName: "{{ .cluster.defaultIngressClass }}"
-              rules:
-                - host: "pinchflat.{{ .customer.primaryDomain }}"
-                  http:
-                    paths:
-                      - path: /
-                        pathType: Prefix
-                        backend:
-                          service:
-                            name: pinchflat
-                            port:
-                              number: 8945
-              tls:
-                - hosts:
-                    - "pinchflat.{{ .customer.primaryDomain }}"
-                  secretName: pinchflat-tls
           - apiVersion: v1
             kind: PersistentVolumeClaim
             metadata:
@@ -114,14 +91,3 @@ spec:
               resources:
                 requests:
                   storage: 2Gi
-          - apiVersion: v1
-            kind: PersistentVolumeClaim
-            metadata:
-              name: media-library
-            spec:
-              accessModes:
-                - ReadWriteOnce
-              storageClassName: "{{ .cluster.defaultStorageClass }}"
-              resources:
-                requests:
-                  storage: 10Gi

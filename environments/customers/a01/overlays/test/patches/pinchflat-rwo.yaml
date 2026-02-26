@@ -1,0 +1,16 @@
+- op: add
+  path: /spec/source/helm/valuesObject/resources/0/spec/template/spec/affinity
+  value:
+    podAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                  - jellyfin
+              - key: app.kubernetes.io/instance
+                operator: In
+                values:
+                  - a01-jellyfin-test
+          topologyKey: kubernetes.io/hostname

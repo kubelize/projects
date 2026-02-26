@@ -1,7 +1,0 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: pinchflat
-spec:
-  destination:
-    namespace: a01-jellyfin-test

@@ -14,8 +14,8 @@ patches:
   - target:
       kind: Application
       name: pinchflat
-    path: patches/pinchflat.yaml
+    path: patches/pinchflat-service.yaml
   - target:
       kind: Application
       name: pinchflat
-    path: patches/pinchflat-service.yaml
+    path: patches/pinchflat-rwo.yaml
