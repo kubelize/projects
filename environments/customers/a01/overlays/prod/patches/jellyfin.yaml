@@ -1,0 +1,19 @@
+- op: replace
+  path: /spec/source/helm/valuesObject/persistence/media/size
+  value: 100Gi
+- op: replace
+  path: /spec/source/helm/valuesObject/ingress
+  value:
+    enabled: true
+    className: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod-nginx
+    hosts:
+      - host: jellyfin.{{ .customer.domain }}
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+    tls:
+      - hosts:
+          - jellyfin.{{ .customer.domain }}
+        secretName: jellyfin-tls

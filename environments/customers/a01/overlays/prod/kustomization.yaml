@@ -8,6 +8,8 @@ resources:
   - ../../../../../apps/filehosting/nextcloud/
   # - ../../../../../apps/productivity/overleaf/
   - ../../../../../apps/productivity/jupyterhub/
+  - ../../../../../apps/filehosting/jellyfin/
+  - ../../../../../apps/filehosting/pinchflat/
 patches:
   # - target:
   #     kind: Application
