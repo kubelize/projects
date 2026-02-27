@@ -11,7 +11,7 @@ spec:
       allowEmpty: false
     syncOptions:
       - CreateNamespace=true
-  project: default
+  project: "{{ .customer.name }}-{{ .customer.project }}"
   destination:
     server: https://kubernetes.default.svc
     namespace: "{{ .customer.name }}-jellyfin-{{ .customer.stage }}"
@@ -22,7 +22,7 @@ spec:
     helm:
       valuesObject:
         service:
-          type: LoadBalancer
+          type: ClusterIP
         ingress:
           enabled: false
         jellyfin:
@@ -40,9 +40,12 @@ spec:
           config:
             enabled: true
             accessMode: ReadWriteOnce
-            size: 500Gi
+            size: 5Gi
             storageClass: "{{ .cluster.defaultStorageClass }}"
           media:
-            enabled: false
+            enabled: true
+            accessMode: ReadWriteOnce
+            size: 5Gi
+            storageClass: "{{ .cluster.defaultStorageClass }}"  
           cache:
             enabled: false

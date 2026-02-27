@@ -5,8 +5,13 @@ nameSuffix: "-test"
 resources:
   - placeholder-configmap.yaml
   - ../../../../../apps/filehosting/jellyfin/
+  - ../../../../../apps/filehosting/pinchflat/
 patches:
   - target:
       kind: Application
       name: jellyfin
     path: patches/jellyfin.yaml
+  - target:
+      kind: Application
+      name: pinchflat
+    path: patches/pinchflat.yaml

@@ -1,0 +1,91 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: pinchflat
+  namespace: "{{ .customer.name }}-reserved"
+spec:
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: false
+      allowEmpty: false
+    syncOptions:
+      - CreateNamespace=true
+  project: "{{ .customer.name }}-{{ .customer.project }}"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: "{{ .customer.name }}-jellyfin-{{ .customer.stage }}"
+  source:
+    repoURL: https://bedag.github.io/helm-charts
+    targetRevision: 2.0.0
+    chart: raw
+    helm:
+      valuesObject:
+        resources:
+          - apiVersion: apps/v1
+            kind: Deployment
+            metadata:
+              name: pinchflat
+              labels:
+                app: pinchflat
+            spec:
+              replicas: 1
+              selector:
+                matchLabels:
+                  app: pinchflat
+              template:
+                metadata:
+                  labels:
+                    app: pinchflat
+                spec:
+                  affinity:
+                    podAffinity:
+                      requiredDuringSchedulingIgnoredDuringExecution:
+                        - labelSelector:
+                            matchExpressions:
+                              - key: app.kubernetes.io/name
+                                operator: In
+                                values:
+                                  - jellyfin
+                          topologyKey: kubernetes.io/hostname
+                  containers:
+                    - name: pinchflat
+                      image: ghcr.io/kieraneglin/pinchflat:latest
+                      ports:
+                        - name: http
+                          containerPort: 8945
+                      env:
+                        - name: TZ
+                          value: Europe/Zurich
+                        - name: LOG_LEVEL
+                          value: info
+                      resources:
+                        requests:
+                          cpu: 100m
+                          memory: 256Mi
+                        limits:
+                          cpu: 1000m
+                          memory: 2Gi
+                      volumeMounts:
+                        - name: pinchflat-config
+                          mountPath: /config
+                        - name: media-library
+                          mountPath: /downloads
+                  volumes:
+                    - name: pinchflat-config
+                      emptyDir: {}
+                    - name: media-library
+                      persistentVolumeClaim:
+                        claimName: "{{ .customer.name }}-jellyfin-{{ .customer.stage }}-media"
+          - apiVersion: v1
+            kind: Service
+            metadata:
+              name: pinchflat
+            spec:
+              selector:
+                app: pinchflat
+              ports:
+                - name: http
+                  port: 8945
+                  targetPort: http
+              type: ClusterIP

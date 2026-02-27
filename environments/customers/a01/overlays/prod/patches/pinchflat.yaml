@@ -1,0 +1,20 @@
+- op: replace
+  path: /spec/source/helm/valuesObject/resources/0/spec/template/spec/volumes/0
+  value:
+    name: pinchflat-config
+    persistentVolumeClaim:
+      claimName: pinchflat-config
+- op: add
+  path: /spec/source/helm/valuesObject/resources/-
+  value:
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      name: pinchflat-config
+    spec:
+      accessModes:
+        - ReadWriteMany
+      storageClassName: nfs
+      resources:
+        requests:
+          storage: 2Gi
