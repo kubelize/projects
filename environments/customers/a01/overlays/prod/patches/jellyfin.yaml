@@ -9,11 +9,11 @@
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-prod-nginx
     hosts:
-      - host: jellyfin.{{ .customer.domain }}
+      - host: jellyfin.{{ .customer.primaryDomain }}
         paths:
           - path: /
             pathType: ImplementationSpecific
     tls:
       - hosts:
-          - jellyfin.{{ .customer.domain }}
+          - jellyfin.{{ .customer.primaryDomain }}
         secretName: jellyfin-tls
