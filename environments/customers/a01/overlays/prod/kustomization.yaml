@@ -31,6 +31,14 @@ patches:
       kind: Application
       name: nextcloud
     path: patches/nextcloud-values.yaml
+  - target:
+      kind: Application
+      name: jellyfin
+    path: patches/jellyfin.yaml
+  - target:
+      kind: Application
+      name: pinchflat
+    path: patches/pinchflat.yaml
   # - target:
   #     kind: Application
   #     name: nextcloud
