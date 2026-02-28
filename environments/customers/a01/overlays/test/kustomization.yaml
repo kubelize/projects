@@ -6,6 +6,7 @@ resources:
   - placeholder-configmap.yaml
   - ../../../../../apps/filehosting/jellyfin/
   - ../../../../../apps/filehosting/pinchflat/
+  - ../../../../../apps/gameservers/tools/web-rcon/
 patches:
   - target:
       kind: Application
