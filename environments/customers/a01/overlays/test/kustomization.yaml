@@ -17,3 +17,7 @@ patches:
       kind: Application
       name: pinchflat
     path: patches/pinchflat.yaml
+  - target:
+      kind: Application
+      name: a01-paper-minecraft-test
+    path: patches/paper-minecraft.yaml
