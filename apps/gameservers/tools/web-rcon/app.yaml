@@ -4,7 +4,7 @@ metadata:
   name: "{{ .customer.name }}-web-rcon-{{ .customer.stage }}"
   namespace: "{{ .customer.name }}-reserved"
 spec:
-  project: default
+  project: "{{ .customer.name }}-{{ .customer.project }}"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: "{{ .customer.name }}-web-rcon-{{ .customer.stage }}"
