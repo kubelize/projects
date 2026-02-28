@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: "{{ .customer.name }}-web-rcon-{{ .customer.stage }}"
+  name: "web-rcon"
   namespace: "{{ .customer.name }}-reserved"
 spec:
   project: "{{ .customer.name }}-{{ .customer.project }}"
