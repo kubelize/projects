@@ -3,7 +3,6 @@ kind: Kustomization
 resources: 
   # Customers
   - ../../customers/a01/
-  - ../../customers/qu3/
 
   # Artifacts
   - ../../../common/registries/
