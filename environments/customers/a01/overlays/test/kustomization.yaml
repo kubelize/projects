@@ -7,7 +7,6 @@ resources:
   - ../../../../../apps/filehosting/jellyfin/
   - ../../../../../apps/filehosting/pinchflat/
   - ../../../../../apps/gameservers/tools/web-rcon/
-  - ../../../../../apps/gameservers/minecraft/paper/
 patches:
   - target:
       kind: Application
@@ -17,7 +16,3 @@ patches:
       kind: Application
       name: pinchflat
     path: patches/pinchflat.yaml
-  - target:
-      kind: Application
-      name: paper-minecraft
-    path: patches/paper-minecraft.yaml
