@@ -19,5 +19,5 @@ patches:
     path: patches/pinchflat.yaml
   - target:
       kind: Application
-      name: a01-paper-minecraft-test
+      name: paper-minecraft
     path: patches/paper-minecraft.yaml
