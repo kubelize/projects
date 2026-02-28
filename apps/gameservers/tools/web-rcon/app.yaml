@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: "web-rcon"
-  namespace: "argocd"
+  name: "{{ .customer.name }}-web-rcon-{{ .customer.stage }}"
+  namespace: "{{ .customer.name }}-reserved"
 spec:
   project: default
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: web-rcon
+    namespace: "{{ .customer.name }}-web-rcon-{{ .customer.stage }}"
   source:
     repoURL: https://bedag.github.io/helm-charts
     targetRevision: 2.0.0
@@ -18,19 +18,19 @@ spec:
         - apiVersion: apps/v1
           kind: Deployment
           metadata:
-            name: web-rcon
+            name: "{{ .customer.name }}-web-rcon-{{ .customer.stage }}"
           spec:
             replicas: 1
             selector:
               matchLabels:
-                app: web-rcon
+                app: "{{ .customer.name }}-web-rcon-{{ .customer.stage }}"
             template:
               metadata:
                 labels:
-                  app: web-rcon
+                  app: "{{ .customer.name }}-web-rcon-{{ .customer.stage }}"
               spec:
                 containers:
-                  - name: web-rcon
+                  - name: "{{ .customer.name }}-web-rcon-{{ .customer.stage }}"
                     image: kubelize/web-rcon:1.0.1
                     imagePullPolicy: Always
                     ports:
@@ -44,12 +44,46 @@ spec:
                     secret:
                       secretName: rcon-config
         - apiVersion: v1
+          kind: ServiceAccount
+          metadata:
+            name: vault-auth
+        - apiVersion: secrets.hashicorp.com/v1beta1
+          kind: VaultAuth
+          metadata:
+            name: web-rcon
+          spec:
+            method: kubernetes
+            mount: kubernetes
+            kubernetes:
+              role: "{{ .customer.name }}-read"
+              serviceAccount: vault-auth
+              audiences:
+                - vault
+        - apiVersion: secrets.hashicorp.com/v1beta1
+          kind: VaultStaticSecret
+          metadata:
+            name: rcon-config
+          spec:
+            type: kv-v2
+            mount: "kv-{{ .customer.name }}"
+            path: web-rcon/rcon-config
+            vaultAuthRef: web-rcon
+            refreshAfter: 1m
+            destination:
+              create: true
+              overwrite: true
+              name: rcon-config
+              type: Opaque
+            rolloutRestartTargets:
+              - kind: Deployment
+                name: "{{ .customer.name }}-web-rcon-{{ .customer.stage }}"
+        - apiVersion: v1
           kind: Service
           metadata:
-            name: web-rcon-service
+            name: "{{ .customer.name }}-web-rcon-{{ .customer.stage }}-service"
           spec:
             selector:
-              app: web-rcon
+              app: "{{ .customer.name }}-web-rcon-{{ .customer.stage }}"
             ports:
               - protocol: TCP
                 port: 443
